@@ -1,8 +1,10 @@
 import { Tabs } from 'expo-router';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 
 function TabIcon({ emoji, focused }: { emoji: string; focused: boolean }) {
-  return <Text style={{ fontSize: focused ? 22 : 20, opacity: focused ? 1 : 0.5 }}>{emoji}</Text>;
+  return (
+    <Text style={{ fontSize: focused ? 22 : 19, opacity: focused ? 1 : 0.45 }}>{emoji}</Text>
+  );
 }
 
 export default function TabLayout() {
@@ -11,36 +13,29 @@ export default function TabLayout() {
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
-          backgroundColor: '#1A2118',
-          borderTopColor: '#233022',
+          backgroundColor: '#1c211e',
+          borderTopColor: '#262b29',
           borderTopWidth: 1,
           height: 64,
           paddingBottom: 10,
           paddingTop: 8,
         },
-        tabBarActiveTintColor: '#D4AF37',
+        tabBarActiveTintColor: '#59de9b',
         tabBarInactiveTintColor: '#8A9A98',
-        tabBarLabelStyle: { fontSize: 10, fontWeight: '600', letterSpacing: 0.5 },
+        tabBarLabelStyle: { fontSize: 10, fontWeight: '600', letterSpacing: 0.4 },
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Dashboard',
+          title: 'Home',
           tabBarIcon: ({ focused }) => <TabIcon emoji="⊞" focused={focused} />,
-        }}
-      />
-      <Tabs.Screen
-        name="arena"
-        options={{
-          title: 'Arena',
-          tabBarIcon: ({ focused }) => <TabIcon emoji="🎮" focused={focused} />,
         }}
       />
       <Tabs.Screen
         name="explorer"
         options={{
-          title: 'Explorer',
+          title: 'Discover',
           tabBarIcon: ({ focused }) => <TabIcon emoji="🧭" focused={focused} />,
         }}
       />
@@ -54,7 +49,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="leaderboard"
         options={{
-          title: 'Leaderboard',
+          title: 'Prestige',
           tabBarIcon: ({ focused }) => <TabIcon emoji="🏆" focused={focused} />,
         }}
       />
@@ -65,6 +60,8 @@ export default function TabLayout() {
           tabBarIcon: ({ focused }) => <TabIcon emoji="🎖" focused={focused} />,
         }}
       />
+      {/* Arena is a gameplay page, not a tab */}
+      <Tabs.Screen name="arena" options={{ href: null }} />
     </Tabs>
   );
 }

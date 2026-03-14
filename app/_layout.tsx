@@ -6,7 +6,7 @@ import "../global.css";
 export default function Layout() {
   return (
     <View className="flex-1 bg-brand-background">
-      <StatusBar style="dark" />
+      <StatusBar style="light" />
       <Stack
         screenOptions={{
           headerShown: false,

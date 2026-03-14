@@ -1,48 +1,72 @@
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, ImageBackground } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Link } from 'expo-router';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function Home() {
   return (
     <View className="flex-1 bg-brand-background">
-      <SafeAreaView className="flex-1 px-6 justify-between py-12">
-        <View className="space-y-2 mt-10">
-          <Text className="text-brand-primary text-xl font-bold uppercase tracking-widest">
-            Antigravity
+      {/* Background Decorative Glows */}
+      <View className="absolute top-[-100] right-[-100] w-80 h-80 bg-brand-primary/20 rounded-full blur-3xl" />
+      <View className="absolute bottom-[-50] left-[-50] w-64 h-64 bg-brand-secondary/10 rounded-full blur-3xl" />
+
+      <SafeAreaView className="flex-1 px-8 justify-between py-12">
+        <View className="mt-12">
+          <View className="flex-row items-center space-x-2 mb-2">
+            <View className="w-8 h-[2px] bg-brand-secondary" />
+            <Text className="text-brand-secondary text-xs font-bold uppercase tracking-[4px]">
+              Antigravity
+            </Text>
+          </View>
+          
+          <Text className="text-5xl font-serif text-brand-text leading-[1.15] mb-4">
+            Daily{'\n'}
+            <Text className="text-brand-secondary italic">Naija</Text>{'\n'}
+            Trivia
           </Text>
-          <Text className="text-4xl font-serif text-brand-secondary leading-tight">
-            Daily Naija{'\n'}Trivia
-          </Text>
+          
+          <View className="w-16 h-1 bg-brand-secondary/30 rounded-full" />
         </View>
 
-        <View className="bg-white/80 p-6 rounded-3xl border border-brand-secondary/10 shadow-sm">
-           <Text className="text-brand-secondary font-medium mb-2 uppercase text-xs">
-             Did you know?
+        {/* Glassmorphic "Did you know?" Card */}
+        <View className="bg-brand-surface/40 p-8 rounded-[40px] border border-brand-text/5 overflow-hidden">
+           <View className="absolute top-0 left-0 right-0 bottom-0 bg-white/5" />
+           <Text className="text-brand-secondary font-bold mb-3 uppercase text-[10px] tracking-[2px]">
+             Cultural Insight
            </Text>
-           <Text className="text-lg text-gray-800 font-serif leading-relaxed">
-             The name "Nigeria" was suggested by British journalist Flora Shaw in 1897.
+           <Text className="text-xl text-brand-text/90 font-serif leading-relaxed italic">
+             "The name 'Nigeria' was suggested by Flora Shaw in 1897, inspired by the great River Niger."
            </Text>
         </View>
 
-        <View className="space-y-4 mb-8">
+        <View className="space-y-6 mb-12">
            <Link href="/game/daily" asChild>
-             <TouchableOpacity className="bg-brand-primary p-4 rounded-xl shadow-lg active:opacity-90">
-                <Text className="text-white text-center font-bold text-lg">
-                  Play Daily Trivia
-                </Text>
+             <TouchableOpacity activeOpacity={0.9}>
+               <LinearGradient
+                 colors={['#D4AF37', '#B8860B']}
+                 start={{ x: 0, y: 0 }}
+                 end={{ x: 1, y: 1 }}
+                 className="p-5 rounded-2xl shadow-2xl"
+               >
+                 <Text className="text-brand-primary text-center font-bold text-lg uppercase tracking-widest">
+                   Begin Challenge
+                 </Text>
+               </LinearGradient>
              </TouchableOpacity>
            </Link>
            
            <Link href="/packs" asChild>
-             <TouchableOpacity className="bg-brand-secondary p-4 rounded-xl active:opacity-90">
-                <Text className="text-white text-center font-bold text-lg">
-                  Offline Packs
+             <TouchableOpacity 
+               className="bg-brand-surface border border-brand-secondary/20 p-5 rounded-2xl active:opacity-90"
+             >
+                <Text className="text-brand-secondary text-center font-bold text-lg uppercase tracking-widest">
+                  Library
                 </Text>
              </TouchableOpacity>
            </Link>
            
-           <Text className="text-center text-brand-secondary/60 text-sm mt-4">
-             Works fully offline
+           <Text className="text-center text-brand-muted text-xs uppercase tracking-widest mt-6">
+             Crafted for the Nigerian Soul
            </Text>
         </View>
       </SafeAreaView>

@@ -5,13 +5,20 @@ module.exports = {
     extend: {
       colors: {
         brand: {
-          primary: '#E94E1B', // Terra Cotta / Nigerian Clay
-          secondary: '#1C3F34', // Deep Green / Forest
-          accent: '#FFD700', // Gold
-          background: '#F9F7F2', // Warm Paper
+          primary: '#013220', // Midnight Emerald
+          secondary: '#D4AF37', // Polished Gold
+          accent: '#004D40', // Deep Teal
+          background: '#050808', // Deepest Slate
+          surface: '#0D1413', // Glassmorphic surface
+          text: '#F9F7F2', // Warm Ivory text
+          muted: '#8A9A98', // Muted slate green
         }
       },
+      fontFamily: {
+        serif: ['serif'], // Use system serif for elegant titles
+      }
     },
   },
   plugins: [],
 }
+

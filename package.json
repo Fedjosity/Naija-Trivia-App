@@ -11,11 +11,12 @@
   "dependencies": {
     "@antigravity/content-schema": "workspace:^",
     "@antigravity/utils": "workspace:^",
-    "expo": "~54.0.32",
+    "expo": "~54.0.33",
     "expo-constants": "^18.0.13",
     "expo-file-system": "^19.0.21",
+    "expo-linear-gradient": "~15.0.8",
     "expo-linking": "^8.0.11",
-    "expo-router": "^6.0.22",
+    "expo-router": "^6.0.23",
     "expo-status-bar": "~3.0.9",
     "nativewind": "^4.2.1",
     "react": "19.1.0",
@@ -24,7 +25,7 @@
     "react-native-mmkv": "^4.1.1",
     "react-native-reanimated": "~4.1.6",
     "react-native-safe-area-context": "^5.6.2",
-    "react-native-screens": "^4.20.0",
+    "react-native-screens": "^4.16.0",
     "tailwindcss": "3"
   },
   "devDependencies": {

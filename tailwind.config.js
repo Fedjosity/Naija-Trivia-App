@@ -5,21 +5,24 @@ module.exports = {
     extend: {
       colors: {
         brand: {
-          // Core palette
-          bg:        '#0D1410', // App background (near-black green)
-          surface:   '#1A2118', // Cards & panels
-          elevated:  '#233022', // Elevated surfaces
+          // ── Stitch Midnight Emerald & Polished Gold ──────────────────────────
+          bg:              '#0f1412', // surface (darkest base)
+          surface:         '#1c211e', // surface_container
+          elevated:        '#262b29', // surface_container_high
+          highest:         '#313633', // surface_container_highest
           // Accents
-          green:     '#2D6A4F', // Emerald green (CTAs, active tabs)
-          'green-light': '#3A7D5E',
-          gold:      '#D4AF37', // Polished gold (headings, prices, accents)
-          'gold-light': '#F5C518',
+          green:           '#59de9b', // primary
+          'green-dim':     '#004e2f', // primary_container
+          gold:            '#e9c349', // secondary
+          'gold-dim':      '#af8d11', // secondary_container
           // Text
-          text:      '#FFFFFF', // Primary text
-          muted:     '#8A9A98', // Secondary / placeholder text
+          text:            '#dfe4e0', // on_surface
+          muted:           '#bfc9c4', // on_surface_variant
+          faint:           '#89938f', // outline
           // Semantic
-          correct:   '#22C55E', // Correct answer green
-          wrong:     '#EF4444', // Wrong answer red
+          correct:         '#59de9b', // primary
+          wrong:           '#93000a', // error_container
+          outline:         '#3f4945', // outline_variant
         }
       },
     },

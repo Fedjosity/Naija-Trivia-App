@@ -1,147 +1,164 @@
-import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
-import StatWidget from '../../components/StatWidget';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useState, useEffect, useRef } from 'react';
+import { Animated, Easing } from 'react-native';
 
-// ─── Mock Data ─────────────────────────────────────────────────────────────
+// ─── Stitch Tokens ─────────────────────────────────────────────────────────
+// bg: #0f1412 | surface: #1c211e | elevated: #262b29 | highest: #313633
+// green: #59de9b | gold: #e9c349 | text: #dfe4e0 | muted: #bfc9c4 | faint: #89938f
+
 const PACKS = [
-  {
-    id: '1',
-    title: 'Flavors of Naija',
-    description: 'How well do you know our spices, recipes, and regional delicacies?',
-    badge: 'POPULAR',
-    questions: 25,
-    color: '#8B4513',
-  },
-  {
-    id: '2',
-    title: 'Afrobeats Icons',
-    description: 'From Fela to Burna Boy. Test your ear for the rhythm of the giants.',
-    badge: 'MUSIC',
-    questions: 40,
-    color: '#2A1A2A',
-  },
-  {
-    id: '3',
-    title: 'Lagos City Hustle',
-    description: 'The landmarks, the streets, and the spirit of the Center of Excellence.',
-    badge: 'NEW',
-    questions: 30,
-    color: '#1A2A3A',
-  },
+  { id: '1', title: 'Flavors of Naija', desc: 'How well do you know our spices, recipes, and regional delicacies?', badge: 'POPULAR', icon: '🍲', color: '#2a1a0a' },
+  { id: '2', title: 'Afrobeats Icons', desc: 'From Fela to Burna Boy. Test your ear for the rhythm of the giants.', badge: 'MUSIC', icon: '🎵', color: '#1a0a2a' },
+  { id: '3', title: 'Lagos City Hustle', desc: 'The landmarks, the streets, and the spirit of the Center of Excellence.', badge: 'NEW', icon: '🏙', color: '#0a1a2a' },
 ];
 
 const RECENT = [
-  { icon: '✅', title: 'Nollywood Classics Mastered', sub: '2 hours ago · Perfect Score', xp: '+500 XP', xpColor: '#22C55E' },
-  { icon: '📈', title: 'Rank Up! Gold League', sub: 'Yesterday · Climbing the ladder', xp: 'PROMOTED', xpColor: '#D4AF37' },
+  { icon: '✅', title: 'Nollywood Classics Mastered', sub: '2 hours ago · Perfect Score', xp: '+500 XP', xpColor: '#59de9b' },
+  { icon: '📈', title: 'Rank Up! Gold League Tier II', sub: 'Yesterday · Climbing the ladder', xp: 'PROMOTED', xpColor: '#e9c349' },
 ];
+
+// ── Countdown ──
+function useCountdown(initial: number) {
+  const [time, setTime] = useState(initial);
+  useEffect(() => {
+    const id = setInterval(() => setTime(t => (t > 0 ? t - 1 : 0)), 1000);
+    return () => clearInterval(id);
+  }, []);
+  const h = String(Math.floor(time / 3600)).padStart(2, '0');
+  const m = String(Math.floor((time % 3600) / 60)).padStart(2, '0');
+  const s = String(time % 60).padStart(2, '0');
+  return { h, m, s };
+}
 
 export default function DashboardScreen() {
   const router = useRouter();
+  const { h, m, s } = useCountdown(14 * 3600 + 32 * 60 + 8);
 
   return (
-    <View className="flex-1 bg-brand-bg">
-      <SafeAreaView edges={['top']} className="flex-1">
+    <View style={{ flex: 1, backgroundColor: '#0f1412' }}>
+      <SafeAreaView edges={['top']} style={{ flex: 1 }}>
         {/* Header */}
-        <View className="flex-row justify-between items-center px-5 py-3">
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 20, paddingVertical: 12 }}>
           <TouchableOpacity>
-            <View className="space-y-1">
-              <View className="w-5 h-0.5 bg-brand-text" />
-              <View className="w-5 h-0.5 bg-brand-text" />
-              <View className="w-5 h-0.5 bg-brand-text" />
+            <View style={{ gap: 5 }}>
+              <View style={{ width: 22, height: 2, backgroundColor: '#dfe4e0', borderRadius: 1 }} />
+              <View style={{ width: 22, height: 2, backgroundColor: '#dfe4e0', borderRadius: 1 }} />
+              <View style={{ width: 22, height: 2, backgroundColor: '#dfe4e0', borderRadius: 1 }} />
             </View>
           </TouchableOpacity>
-          <Text className="text-brand-text font-bold text-base">Daily Naija Trivia</Text>
-          <View className="flex-row items-center space-x-3">
-            <Text className="text-2xl">🔔</Text>
-            <View className="w-9 h-9 rounded-full bg-brand-gold overflow-hidden items-center justify-center">
-              <Text className="text-brand-bg font-bold">T</Text>
+          <Text style={{ color: '#dfe4e0', fontWeight: '800', fontSize: 16 }}>Daily Naija Trivia</Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+            <Text style={{ fontSize: 22 }}>🔔</Text>
+            <View style={{ width: 36, height: 36, borderRadius: 18, backgroundColor: '#e9c349', alignItems: 'center', justifyContent: 'center' }}>
+              <Text style={{ color: '#0f1412', fontWeight: '900', fontSize: 14 }}>T</Text>
             </View>
           </View>
         </View>
 
-        <ScrollView className="flex-1" showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 24 }}>
+        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 32 }}>
           {/* Special Event Banner */}
-          <View className="mx-5 mt-2 rounded-2xl overflow-hidden" style={{ backgroundColor: '#1A3A2A' }}>
-            <View className="p-5">
-              <View className="flex-row items-center mb-2">
-                <View className="bg-brand-green px-3 py-1 rounded-full mr-2">
-                  <Text className="text-white text-[10px] font-bold uppercase tracking-wide">Special Event</Text>
-                </View>
+          <View style={{ marginHorizontal: 20, marginTop: 8, borderRadius: 24, overflow: 'hidden', backgroundColor: '#1a2e1a' }}>
+            <LinearGradient
+              colors={['#1f3a1f', '#1a2e1a']}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={{ padding: 22 }}
+            >
+              <View style={{ backgroundColor: '#59de9b', alignSelf: 'flex-start', paddingHorizontal: 10, paddingVertical: 4, borderRadius: 999, marginBottom: 10 }}>
+                <Text style={{ color: '#0f1412', fontSize: 10, fontWeight: '800', textTransform: 'uppercase', letterSpacing: 1 }}>Special Event</Text>
               </View>
-              <Text className="text-brand-text text-2xl font-bold leading-tight mb-1">
+              <Text style={{ color: '#dfe4e0', fontSize: 22, fontWeight: '900', lineHeight: 30, marginBottom: 6 }}>
                 Heritage of the Savannah
               </Text>
-              <Text className="text-brand-muted text-xs leading-relaxed mb-4">
+              <Text style={{ color: '#bfc9c4', fontSize: 12, lineHeight: 19, marginBottom: 18 }}>
                 Test your knowledge on the diverse wildlife and ecosystems of Northern Nigeria's vast reserves.
               </Text>
               <TouchableOpacity
-                className="bg-brand-green self-start px-5 py-2.5 rounded-full flex-row items-center"
                 onPress={() => router.push('/(tabs)/arena')}
+                style={{ alignSelf: 'flex-start' }}
               >
-                <Text className="text-white font-bold text-sm mr-1">Play Now</Text>
-                <Text className="text-white text-sm">▶</Text>
+                <View style={{ backgroundColor: '#59de9b', paddingHorizontal: 18, paddingVertical: 11, borderRadius: 999, flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+                  <Text style={{ color: '#0f1412', fontWeight: '800', fontSize: 13 }}>Play Now</Text>
+                  <Text style={{ color: '#0f1412', fontSize: 13 }}>▶</Text>
+                </View>
               </TouchableOpacity>
-            </View>
+            </LinearGradient>
 
-            {/* Countdown */}
-            <View className="border-t border-white/10 px-5 py-3 flex-row items-center justify-between">
-              <Text className="text-brand-muted text-[10px] uppercase tracking-widest">Challenge Expires In</Text>
-              <View className="flex-row space-x-3">
-                {[['14', 'HOURS'], ['32', 'MINS'], ['08', 'SECS']].map(([val, unit]) => (
-                  <View key={unit} className="items-center">
-                    <Text className="text-brand-gold text-xl font-bold">{val}</Text>
-                    <Text className="text-brand-muted text-[9px]">{unit}</Text>
+            {/* Countdown strip */}
+            <View style={{ borderTopWidth: 1, borderTopColor: 'rgba(255,255,255,0.06)', paddingHorizontal: 22, paddingVertical: 14, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+              <Text style={{ color: '#89938f', fontSize: 10, textTransform: 'uppercase', letterSpacing: 2 }}>Challenge Expires In</Text>
+              <View style={{ flexDirection: 'row', gap: 16 }}>
+                {[[h, 'Hours'], [m, 'Mins'], [s, 'Secs']].map(([val, label]) => (
+                  <View key={label} style={{ alignItems: 'center' }}>
+                    <Text style={{ color: '#e9c349', fontWeight: '900', fontSize: 20, lineHeight: 24 }}>{val}</Text>
+                    <Text style={{ color: '#89938f', fontSize: 9, textTransform: 'uppercase', letterSpacing: 0.5 }}>{label}</Text>
                   </View>
                 ))}
               </View>
             </View>
           </View>
 
-          {/* Stats Row */}
-          <View className="flex-row px-5 mt-5 space-x-3">
-            <StatWidget icon="🔥" label="Current Streak" value="12 Days" sub="BEST: 21" />
-            <StatWidget icon="🏆" label="Global Rank" value="#482" sub="TOP 2%" subColor="text-brand-gold" />
+          {/* Stats */}
+          <View style={{ flexDirection: 'row', paddingHorizontal: 20, marginTop: 20, gap: 12 }}>
+            {[
+              { icon: '🔥', label: 'Current Streak', value: '12 Days', sub: 'BEST: 21' },
+              { icon: '🏆', label: 'Global Rank', value: '#482', sub: 'TOP 2%' },
+            ].map(s => (
+              <View key={s.label} style={{ flex: 1, backgroundColor: '#1c211e', borderRadius: 20, padding: 16 }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 }}>
+                  <Text style={{ fontSize: 22 }}>{s.icon}</Text>
+                  <View style={{ backgroundColor: '#262b29', paddingHorizontal: 8, paddingVertical: 3, borderRadius: 999 }}>
+                    <Text style={{ color: '#89938f', fontSize: 9, fontWeight: '700' }}>{s.sub}</Text>
+                  </View>
+                </View>
+                <Text style={{ color: '#89938f', fontSize: 10, textTransform: 'uppercase', letterSpacing: 1.5, marginBottom: 4 }}>{s.label}</Text>
+                <Text style={{ color: '#dfe4e0', fontWeight: '900', fontSize: 22 }}>{s.value}</Text>
+              </View>
+            ))}
           </View>
-          <View className="px-5 mt-3">
-            <StatWidget icon="🪙" label="Trivia Tokens" value="2,450" sub="TOP UP" subColor="text-brand-green" />
+          <View style={{ marginHorizontal: 20, marginTop: 12, backgroundColor: '#1c211e', borderRadius: 20, padding: 16, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+              <Text style={{ fontSize: 22 }}>🪙</Text>
+              <View>
+                <Text style={{ color: '#89938f', fontSize: 10, textTransform: 'uppercase', letterSpacing: 1.5 }}>Trivia Tokens</Text>
+                <Text style={{ color: '#dfe4e0', fontWeight: '900', fontSize: 22 }}>2,450</Text>
+              </View>
+            </View>
+            <TouchableOpacity style={{ backgroundColor: '#262b29', paddingHorizontal: 16, paddingVertical: 8, borderRadius: 12 }}>
+              <Text style={{ color: '#59de9b', fontWeight: '700', fontSize: 12 }}>Top Up +</Text>
+            </TouchableOpacity>
           </View>
 
           {/* Available Packs */}
-          <View className="mt-6 px-5">
-            <View className="flex-row justify-between items-center mb-4">
-              <Text className="text-brand-text text-lg font-bold">Available Packs</Text>
-              <TouchableOpacity>
-                <Text className="text-brand-gold text-sm font-semibold">View All Packs</Text>
+          <View style={{ marginTop: 28, paddingHorizontal: 20 }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+              <Text style={{ color: '#dfe4e0', fontWeight: '800', fontSize: 18 }}>Available Packs</Text>
+              <TouchableOpacity onPress={() => router.push('/(tabs)/boutique')}>
+                <Text style={{ color: '#e9c349', fontWeight: '700', fontSize: 13 }}>View All Packs</Text>
               </TouchableOpacity>
             </View>
 
             {PACKS.map(pack => (
               <TouchableOpacity
                 key={pack.id}
-                className="bg-brand-surface rounded-2xl overflow-hidden mb-4 border border-white/5"
                 onPress={() => router.push('/(tabs)/arena')}
                 activeOpacity={0.85}
+                style={{ backgroundColor: '#1c211e', borderRadius: 20, overflow: 'hidden', marginBottom: 16 }}
               >
-                {/* Color swatch header */}
-                <View className="h-36 w-full" style={{ backgroundColor: pack.color }}>
-                  <View className="flex-1 items-end p-3">
-                    <View className="bg-brand-green px-2.5 py-1 rounded-full">
-                      <Text className="text-white text-[10px] font-bold uppercase tracking-wide">{pack.badge}</Text>
-                    </View>
+                <View style={{ height: 120, backgroundColor: pack.color, alignItems: 'center', justifyContent: 'center' }}>
+                  <Text style={{ fontSize: 48 }}>{pack.icon}</Text>
+                  <View style={{ position: 'absolute', top: 12, right: 12, backgroundColor: 'rgba(89,222,155,0.2)', paddingHorizontal: 10, paddingVertical: 4, borderRadius: 999 }}>
+                    <Text style={{ color: '#59de9b', fontSize: 9, fontWeight: '700', textTransform: 'uppercase', letterSpacing: 1 }}>{pack.badge}</Text>
                   </View>
                 </View>
-                <View className="p-4">
-                  <Text className="text-brand-text font-bold text-base mb-1">{pack.title}</Text>
-                  <Text className="text-brand-muted text-xs leading-relaxed mb-3">{pack.description}</Text>
-                  <View className="flex-row justify-between items-center">
-                    <Text className="text-brand-muted text-xs">🎯 {pack.questions} Qs</Text>
-                    <TouchableOpacity
-                      className="bg-brand-green px-4 py-2 rounded-xl"
-                      onPress={() => router.push('/(tabs)/arena')}
-                    >
-                      <Text className="text-white text-xs font-bold">Start Pack</Text>
-                    </TouchableOpacity>
+                <View style={{ padding: 16 }}>
+                  <Text style={{ color: '#dfe4e0', fontWeight: '800', fontSize: 16, marginBottom: 4 }}>{pack.title}</Text>
+                  <Text style={{ color: '#bfc9c4', fontSize: 12, lineHeight: 18, marginBottom: 14 }}>{pack.desc}</Text>
+                  <View style={{ backgroundColor: '#262b29', paddingVertical: 10, borderRadius: 12, alignItems: 'center' }}>
+                    <Text style={{ color: '#59de9b', fontWeight: '800', fontSize: 13 }}>Start Pack →</Text>
                   </View>
                 </View>
               </TouchableOpacity>
@@ -149,16 +166,16 @@ export default function DashboardScreen() {
           </View>
 
           {/* Recent Performance */}
-          <View className="px-5 mt-2">
-            <Text className="text-brand-text text-lg font-bold mb-4">Recent Performance</Text>
+          <View style={{ paddingHorizontal: 20 }}>
+            <Text style={{ color: '#dfe4e0', fontWeight: '800', fontSize: 18, marginBottom: 14 }}>Recent Performance</Text>
             {RECENT.map((item, i) => (
-              <View key={i} className="bg-brand-surface rounded-2xl p-4 mb-3 flex-row items-center border border-white/5">
-                <Text className="text-2xl mr-3">{item.icon}</Text>
-                <View className="flex-1">
-                  <Text className="text-brand-text font-semibold text-sm">{item.title}</Text>
-                  <Text className="text-brand-muted text-xs mt-0.5">{item.sub}</Text>
+              <View key={i} style={{ backgroundColor: '#1c211e', borderRadius: 20, padding: 16, marginBottom: 12, flexDirection: 'row', alignItems: 'center' }}>
+                <Text style={{ fontSize: 26, marginRight: 14 }}>{item.icon}</Text>
+                <View style={{ flex: 1 }}>
+                  <Text style={{ color: '#dfe4e0', fontWeight: '700', fontSize: 14 }}>{item.title}</Text>
+                  <Text style={{ color: '#89938f', fontSize: 11, marginTop: 3 }}>{item.sub}</Text>
                 </View>
-                <Text className="font-bold text-sm" style={{ color: item.xpColor }}>{item.xp}</Text>
+                <Text style={{ fontWeight: '800', fontSize: 13, color: item.xpColor }}>{item.xp}</Text>
               </View>
             ))}
           </View>

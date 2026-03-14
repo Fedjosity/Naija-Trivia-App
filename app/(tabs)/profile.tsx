@@ -1,180 +1,136 @@
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { LinearGradient } from 'expo-linear-gradient';
+import { useRef } from 'react';
 import { useRouter } from 'expo-router';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Shield, Award, Zap, Clock, Film, Tv2, ChevronRight, User, BadgeCheck } from 'lucide-react-native';
+import DrawerMenu, { type DrawerHandle } from '../../components/DrawerMenu';
+import AppHeader from '../../components/AppHeader';
 
-// ─── Mock Data ────────────────────────────────────────────────────────────────
 const TROPHIES = [
-  {
-    id: '1',
-    emoji: '👑',
-    name: "The Oba's Crown",
-    desc: 'Awarded for 100% accuracy in the "Kingdoms of the South" series.',
-    date: 'Oct 12, 2023',
-    color: '#D4AF37',
-  },
-  {
-    id: '2',
-    emoji: '🍲',
-    name: 'Jollof Connoisseur',
-    desc: "Mastered the \"Culinary Geography\" challenge without a single mistake.",
-    date: 'Sep 28, 2023',
-    color: '#E05A00',
-  },
-  {
-    id: '3',
-    emoji: '🎬',
-    name: 'Nollywood Legend',
-    desc: 'Successfully identified 50 classic movies from the 90s era.',
-    date: 'Aug 15, 2023',
-    color: '#7B2FBE',
-  },
+  { Icon: Shield, color: '#e9c349', name: "The Oba's Crown", desc: 'Awarded for 100% accuracy in the "Kingdoms of the South" series.', date: 'Oct 12, 2023' },
+  { Icon: Tv2,    color: '#E05A00', name: 'Jollof Connoisseur', desc: 'Mastered the "Culinary Geography" challenge without a single mistake.', date: 'Sep 28, 2023' },
+  { Icon: Film,   color: '#7B2FBE', name: 'Nollywood Legend', desc: 'Successfully identified 50 classic movies from the 90s era.', date: 'Aug 15, 2023' },
 ];
 
 const MILESTONES = [
-  { emoji: '🎵', name: 'Afrobeats Titan' },
-  { emoji: '🗺', name: 'State Explorer' },
-  { emoji: '🏙', name: 'City Architect' },
-  { emoji: '🦅', name: 'Super Eagle' },
-];
-
-const STATS = [
-  { value: '12.4k', label: 'POINTS' },
-  { value: '15', label: 'BADGES' },
-  { value: '#3', label: 'RANK' },
+  { name: 'Afrobeats Titan', Icon: Zap },
+  { name: 'State Explorer', Icon: Award },
+  { name: 'Ancient Historian', Icon: Clock },
+  { name: 'Super Eagle', Icon: Shield },
 ];
 
 export default function ProfileScreen() {
   const router = useRouter();
+  const drawer = useRef<DrawerHandle>(null);
 
   return (
-    <View className="flex-1 bg-brand-bg">
-      <SafeAreaView edges={['top']} className="flex-1">
-        {/* Header */}
-        <View className="flex-row justify-between items-center px-5 py-3">
-          <TouchableOpacity>
-            <View className="space-y-1">
-              <View className="w-5 h-0.5 bg-brand-text" />
-              <View className="w-5 h-0.5 bg-brand-text" />
-            </View>
-          </TouchableOpacity>
-          <Text className="text-brand-text font-bold text-base">Daily Naija Trivia</Text>
-          <Text className="text-2xl">🔔</Text>
-        </View>
+    <View style={{ flex: 1, backgroundColor: '#0f1412' }}>
+      <DrawerMenu ref={drawer} />
+      <SafeAreaView edges={['top']} style={{ flex: 1 }}>
+        <AppHeader title="Trophy Room" drawerRef={drawer} />
 
-        <ScrollView className="flex-1" showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 40 }}>
-          {/* Avatar */}
-          <View className="items-center mt-4 mb-5">
-            <View className="relative">
-              <View className="w-20 h-20 rounded-full bg-brand-gold/80 items-center justify-center border-4 border-brand-gold">
-                <Text style={{ fontSize: 36 }}>🧑🏾</Text>
+        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 40 }}>
+          {/* Avatar + Profile */}
+          <View style={{ alignItems: 'center', paddingVertical: 20, paddingHorizontal: 20 }}>
+            <View style={{ position: 'relative', marginBottom: 16 }}>
+              <View style={{ width: 80, height: 80, borderRadius: 40, backgroundColor: '#e9c349', alignItems: 'center', justifyContent: 'center', borderWidth: 3, borderColor: '#e9c349' }}>
+                <User size={38} color="#0f1412" />
               </View>
-              <View className="absolute -bottom-1 -right-1 bg-brand-green rounded-full px-2 py-0.5 border-2 border-brand-bg">
-                <Text className="text-white text-[10px] font-bold">LVL 42</Text>
+              <View style={{ position: 'absolute', bottom: -4, right: -4, backgroundColor: '#59de9b', paddingHorizontal: 8, paddingVertical: 3, borderRadius: 999, borderWidth: 2, borderColor: '#0f1412' }}>
+                <Text style={{ color: '#0f1412', fontSize: 9, fontWeight: '900' }}>LVL 42</Text>
               </View>
             </View>
 
-            <Text className="text-brand-text text-2xl font-bold mt-4 text-center">
-              Tunde "The Oracle"
-            </Text>
-            <View className="flex-row items-center mt-1">
-              <Text className="text-brand-gold mr-1">●</Text>
-              <Text className="text-brand-muted text-sm">Grandmaster of Yoruba Folklore</Text>
+            <Text style={{ color: '#dfe4e0', fontSize: 22, fontWeight: '900' }}>Tunde "The Oracle"</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 4 }}>
+              <BadgeCheck size={16} color="#e9c349" />
+              <Text style={{ color: '#89938f', fontSize: 13 }}>Grandmaster of Yoruba Folklore</Text>
             </View>
 
-            {/* Stats */}
-            <View className="flex-row mt-5 space-x-6">
-              {STATS.map(s => (
-                <View key={s.label} className="items-center">
-                  <Text className="text-brand-text font-bold text-lg">{s.value}</Text>
-                  <Text className="text-brand-muted text-[10px] uppercase tracking-widest">{s.label}</Text>
+            <View style={{ flexDirection: 'row', gap: 32, marginTop: 20 }}>
+              {[['12.4k', 'POINTS'], ['15', 'BADGES'], ['#3', 'RANK']].map(([val, label]) => (
+                <View key={label} style={{ alignItems: 'center' }}>
+                  <Text style={{ color: '#dfe4e0', fontWeight: '900', fontSize: 20 }}>{val}</Text>
+                  <Text style={{ color: '#89938f', fontSize: 10, textTransform: 'uppercase', letterSpacing: 1.5, marginTop: 2 }}>{label}</Text>
                 </View>
               ))}
             </View>
           </View>
 
           {/* Streak */}
-          <View className="mx-5 mb-5 bg-brand-surface rounded-2xl p-5 border border-white/5">
-            <Text className="text-brand-muted text-[10px] uppercase tracking-[3px] mb-2">Current Streak</Text>
-            <View className="flex-row items-end mb-2">
-              <Text className="text-brand-green text-5xl font-black">28</Text>
-              <Text className="text-brand-text text-xl ml-2 mb-1">Days</Text>
+          <View style={{ marginHorizontal: 20, marginBottom: 16, backgroundColor: '#1c211e', borderRadius: 20, padding: 20 }}>
+            <Text style={{ color: '#89938f', fontSize: 10, textTransform: 'uppercase', letterSpacing: 2, marginBottom: 8 }}>Current Streak</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'flex-end', marginBottom: 10 }}>
+              <Text style={{ color: '#59de9b', fontWeight: '900', fontSize: 46 }}>28</Text>
+              <Text style={{ color: '#dfe4e0', fontSize: 18, marginLeft: 8, marginBottom: 6 }}>Days</Text>
             </View>
-            <Text className="text-brand-muted text-xs leading-relaxed mb-3">
+            <Text style={{ color: '#bfc9c4', fontSize: 12, lineHeight: 18, marginBottom: 14 }}>
               You're in the top 1% of players this month. Keep the fire burning to unlock the 'Ancient Historian' title.
             </Text>
-            {/* Progress bars */}
-            <View className="flex-row space-x-1.5">
+            <View style={{ flexDirection: 'row', gap: 6 }}>
               {[1, 2, 3, 4].map(i => (
-                <View key={i} className={`flex-1 h-1.5 rounded-full ${i < 4 ? 'bg-brand-green' : 'bg-brand-surface'}`} />
+                <View key={i} style={{ flex: 1, height: 4, borderRadius: 2, backgroundColor: i < 4 ? '#59de9b' : '#262b29' }} />
               ))}
             </View>
           </View>
 
           {/* Vault Value */}
-          <View className="mx-5 mb-6">
-            <LinearGradient
-              colors={['#D4AF37', '#8B6914']}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-              className="rounded-2xl p-5"
-            >
-              <Text className="text-black/50 text-[10px] font-bold uppercase tracking-[3px] mb-1">Vault Value</Text>
-              <Text className="text-brand-bg text-3xl font-black mb-3">₦85,200</Text>
+          <View style={{ marginHorizontal: 20, marginBottom: 24 }}>
+            <LinearGradient colors={['#e9c349', '#8B6914']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={{ borderRadius: 20, padding: 22 }}>
+              <Text style={{ color: 'rgba(0,0,0,0.5)', fontSize: 10, fontWeight: '700', textTransform: 'uppercase', letterSpacing: 2, marginBottom: 4 }}>Vault Value</Text>
+              <Text style={{ color: '#0f1412', fontSize: 34, fontWeight: '900', marginBottom: 16 }}>₦85,200</Text>
               <TouchableOpacity
-                className="bg-black/25 py-3 rounded-xl items-center"
-                activeOpacity={0.85}
+                onPress={() => router.push('/checkout')}
+                style={{ backgroundColor: 'rgba(0,0,0,0.2)', paddingVertical: 12, borderRadius: 14, alignItems: 'center' }}
               >
-                <Text className="text-brand-bg font-bold text-sm uppercase tracking-widest">Redeem Prizes</Text>
+                <Text style={{ color: '#0f1412', fontWeight: '800', fontSize: 14, textTransform: 'uppercase', letterSpacing: 1 }}>Redeem Prizes</Text>
               </TouchableOpacity>
             </LinearGradient>
           </View>
 
           {/* Trophy Timeline */}
-          <View className="px-5 mb-6">
-            <View className="flex-row justify-between items-center mb-4">
-              <Text className="text-brand-text font-bold text-lg">Trophy Timeline</Text>
-              <TouchableOpacity>
-                <Text className="text-brand-gold text-sm font-semibold">View All →</Text>
+          <View style={{ paddingHorizontal: 20, marginBottom: 28 }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 18 }}>
+              <Text style={{ color: '#dfe4e0', fontWeight: '800', fontSize: 18 }}>Trophy Timeline</Text>
+              <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+                <Text style={{ color: '#e9c349', fontSize: 13, fontWeight: '700' }}>View All</Text>
+                <ChevronRight size={14} color="#e9c349" />
               </TouchableOpacity>
             </View>
-
-            {TROPHIES.map((trophy, i) => (
-              <View key={trophy.id} className="flex-row mb-6">
-                {/* Timeline line */}
-                <View className="items-center mr-4">
-                  <View className="w-10 h-10 rounded-full items-center justify-center border-2"
-                    style={{ borderColor: trophy.color, backgroundColor: `${trophy.color}20` }}>
-                    <Text style={{ fontSize: 18 }}>{trophy.emoji}</Text>
+            {TROPHIES.map((trophy, i) => {
+              const IconComp = trophy.Icon;
+              return (
+                <View key={trophy.name} style={{ flexDirection: 'row', marginBottom: 24 }}>
+                  <View style={{ alignItems: 'center', marginRight: 16 }}>
+                    <View style={{ width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', borderWidth: 2, borderColor: trophy.color, backgroundColor: `${trophy.color}22` }}>
+                      <IconComp size={20} color={trophy.color} />
+                    </View>
+                    {i < TROPHIES.length - 1 && <View style={{ width: 1, flex: 1, backgroundColor: '#262b29', marginTop: 8 }} />}
                   </View>
-                  {i < TROPHIES.length - 1 && (
-                    <View className="w-px flex-1 bg-brand-surface mt-2" style={{ minHeight: 24 }} />
-                  )}
+                  <View style={{ flex: 1, paddingTop: 4 }}>
+                    <Text style={{ color: '#dfe4e0', fontWeight: '700', fontSize: 15, marginBottom: 4 }}>{trophy.name}</Text>
+                    <Text style={{ color: '#bfc9c4', fontSize: 12, lineHeight: 18, marginBottom: 4 }}>{trophy.desc}</Text>
+                    <Text style={{ color: '#e9c349', fontSize: 11, fontWeight: '600' }}>{trophy.date}</Text>
+                  </View>
                 </View>
-                {/* Content */}
-                <View className="flex-1 pt-1">
-                  <Text className="text-brand-text font-bold text-base mb-0.5">{trophy.name}</Text>
-                  <Text className="text-brand-muted text-xs leading-relaxed mb-1">{trophy.desc}</Text>
-                  <Text className="text-brand-gold text-xs font-semibold">{trophy.date}</Text>
-                </View>
-              </View>
-            ))}
+              );
+            })}
           </View>
 
           {/* Upcoming Milestones */}
-          <View className="px-5">
-            <Text className="text-brand-text font-bold text-lg mb-4">Upcoming Milestones</Text>
-            <View className="flex-row flex-wrap gap-3">
-              {MILESTONES.map(m => (
-                <View
-                  key={m.name}
-                  className="flex-col items-center justify-center bg-brand-surface rounded-2xl p-4 border border-white/5 opacity-50"
-                  style={{ width: '46%' }}
-                >
-                  <Text style={{ fontSize: 28, marginBottom: 6 }}>{m.emoji}</Text>
-                  <Text className="text-brand-muted text-xs text-center">{m.name}</Text>
-                </View>
-              ))}
+          <View style={{ paddingHorizontal: 20 }}>
+            <Text style={{ color: '#dfe4e0', fontWeight: '800', fontSize: 18, marginBottom: 16 }}>Upcoming Milestones</Text>
+            <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 12 }}>
+              {MILESTONES.map(m => {
+                const IconComp = m.Icon;
+                return (
+                  <View key={m.name} style={{ width: '47%', backgroundColor: '#1c211e', borderRadius: 20, padding: 20, alignItems: 'center', opacity: 0.45 }}>
+                    <IconComp size={32} color="#bfc9c4" style={{ marginBottom: 10 }} />
+                    <Text style={{ color: '#bfc9c4', fontSize: 12, textAlign: 'center' }}>{m.name}</Text>
+                  </View>
+                );
+              })}
             </View>
           </View>
         </ScrollView>

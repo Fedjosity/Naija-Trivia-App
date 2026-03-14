@@ -1,10 +1,14 @@
 import { Tabs } from 'expo-router';
-import { Text, View } from 'react-native';
+import { Home, Compass, ShoppingBag, Trophy, Medal } from 'lucide-react-native';
 
-function TabIcon({ emoji, focused }: { emoji: string; focused: boolean }) {
-  return (
-    <Text style={{ fontSize: focused ? 22 : 19, opacity: focused ? 1 : 0.45 }}>{emoji}</Text>
-  );
+// ─── Stitch Tokens ───────────────────────────────────────────────────────────
+const ACTIVE   = '#59de9b'; // primary
+const INACTIVE = '#89938f'; // outline
+const TAB_BG   = '#1c211e'; // surface_container
+const TAB_BORDER = 'rgba(255,255,255,0.06)';
+
+function TabIcon({ Icon, focused }: { Icon: React.ComponentType<{ size: number; color: string }>; focused: boolean }) {
+  return <Icon size={22} color={focused ? ACTIVE : INACTIVE} />;
 }
 
 export default function TabLayout() {
@@ -13,51 +17,52 @@ export default function TabLayout() {
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
-          backgroundColor: '#1c211e',
-          borderTopColor: '#262b29',
+          backgroundColor: TAB_BG,
+          borderTopColor: TAB_BORDER,
           borderTopWidth: 1,
           height: 64,
           paddingBottom: 10,
           paddingTop: 8,
         },
-        tabBarActiveTintColor: '#59de9b',
-        tabBarInactiveTintColor: '#8A9A98',
-        tabBarLabelStyle: { fontSize: 10, fontWeight: '600', letterSpacing: 0.4 },
+        tabBarActiveTintColor: ACTIVE,
+        tabBarInactiveTintColor: INACTIVE,
+        tabBarLabelStyle: { fontSize: 10, fontWeight: '600', letterSpacing: 0.3 },
+        tabBarHideOnKeyboard: true,
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
           title: 'Home',
-          tabBarIcon: ({ focused }) => <TabIcon emoji="⊞" focused={focused} />,
+          tabBarIcon: ({ focused }) => <TabIcon Icon={Home} focused={focused} />,
         }}
       />
       <Tabs.Screen
         name="explorer"
         options={{
           title: 'Discover',
-          tabBarIcon: ({ focused }) => <TabIcon emoji="🧭" focused={focused} />,
+          tabBarIcon: ({ focused }) => <TabIcon Icon={Compass} focused={focused} />,
         }}
       />
       <Tabs.Screen
         name="boutique"
         options={{
           title: 'Boutique',
-          tabBarIcon: ({ focused }) => <TabIcon emoji="🛍" focused={focused} />,
+          tabBarIcon: ({ focused }) => <TabIcon Icon={ShoppingBag} focused={focused} />,
         }}
       />
       <Tabs.Screen
         name="leaderboard"
         options={{
           title: 'Prestige',
-          tabBarIcon: ({ focused }) => <TabIcon emoji="🏆" focused={focused} />,
+          tabBarIcon: ({ focused }) => <TabIcon Icon={Trophy} focused={focused} />,
         }}
       />
       <Tabs.Screen
         name="profile"
         options={{
           title: 'Trophy Room',
-          tabBarIcon: ({ focused }) => <TabIcon emoji="🎖" focused={focused} />,
+          tabBarIcon: ({ focused }) => <TabIcon Icon={Medal} focused={focused} />,
         }}
       />
       {/* Arena is a gameplay page, not a tab */}

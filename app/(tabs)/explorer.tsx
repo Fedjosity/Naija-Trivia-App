@@ -1,143 +1,131 @@
 import { View, Text, ScrollView, TouchableOpacity, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useRef, useState } from 'react';
+import { Search, Tag, BookOpen, Calendar, ChevronRight, Star } from 'lucide-react-native';
+import DrawerMenu, { type DrawerHandle } from '../../components/DrawerMenu';
+import AppHeader from '../../components/AppHeader';
 import { useRouter } from 'expo-router';
-import { useState } from 'react';
 
-const TAGS = ['#FelaKuti', '#90sSuperEagles', '#LagosNightlife', '#NollywoodClassics'];
-
+const TRENDING_TAGS = ['Niger Delta', 'Nollywood', 'Aso Rock', 'Yoruba Proverbs', 'Lagos Markets'];
 const PACKS = [
-  { id: '1', title: '90s Nollywood', questions: 25, difficulty: 'Expert Level', color: '#2A1A1A' },
-  { id: '2', title: 'Landmarks & Geography', questions: 15, difficulty: 'Beginner', color: '#1A1A2A' },
-  { id: '3', title: 'The Great Jollof Debate', questions: 20, difficulty: 'Casual', color: '#2A1A10' },
+  { id: '1', title: 'Heritage Vault', desc: '1,000+ questions · Benin Empire to Modern Lagos', icon: '🏛', color: '#1a2e24' },
+  { id: '2', title: 'Sports Legends', desc: 'Nigeria 1994 · Olympic golds · Premier League', icon: '⚽', color: '#1a2030' },
 ];
 
 export default function ExplorerScreen() {
   const router = useRouter();
+  const drawer = useRef<DrawerHandle>(null);
   const [search, setSearch] = useState('');
 
   return (
-    <View className="flex-1 bg-brand-bg">
-      <SafeAreaView edges={['top']} className="flex-1">
-        {/* Header */}
-        <View className="flex-row justify-between items-center px-5 py-3">
-          <TouchableOpacity>
-            <View className="space-y-1">
-              <View className="w-5 h-0.5 bg-brand-text" />
-              <View className="w-5 h-0.5 bg-brand-text" />
-              <View className="w-5 h-0.5 bg-brand-text" />
-            </View>
-          </TouchableOpacity>
-          <Text className="text-brand-text font-bold text-base">Daily Naija Trivia</Text>
-          <View className="w-9 h-9 rounded-full bg-brand-surface items-center justify-center">
-            <Text className="text-brand-muted text-sm">👤</Text>
-          </View>
-        </View>
+    <View style={{ flex: 1, backgroundColor: '#0f1412' }}>
+      <DrawerMenu ref={drawer} />
+      <SafeAreaView edges={['top']} style={{ flex: 1 }}>
+        <AppHeader title="Discover" drawerRef={drawer} showSearch={false} />
 
-        <ScrollView className="flex-1" showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 32 }}>
-          {/* Title */}
-          <View className="px-5 mt-3 mb-5">
-            <Text className="text-brand-text text-3xl font-bold leading-tight">
-              Discover the{' '}
-              <Text className="text-brand-gold">Naija{'\n'}Essence</Text>
-            </Text>
-          </View>
-
-          {/* Search */}
-          <View className="mx-5 mb-5 bg-brand-surface rounded-xl flex-row items-center px-4 border border-white/5">
-            <Text className="text-brand-muted mr-3 text-base">🔍</Text>
+        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 40 }}>
+          {/* Search bar */}
+          <View style={{ marginHorizontal: 20, marginBottom: 24, flexDirection: 'row', alignItems: 'center', backgroundColor: '#1c211e', borderRadius: 14, paddingHorizontal: 16, gap: 12 }}>
+            <Search size={18} color="#89938f" />
             <TextInput
               value={search}
               onChangeText={setSearch}
-              placeholder="Search trivia packs, culture..."
-              placeholderTextColor="#8A9A98"
-              className="flex-1 text-brand-text py-3.5 text-sm"
+              placeholder="Search packs, topics, regions..."
+              placeholderTextColor="#89938f"
+              style={{ flex: 1, color: '#dfe4e0', paddingVertical: 14, fontSize: 14 }}
             />
           </View>
 
-          {/* Trending tags */}
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} className="mb-5" contentContainerStyle={{ paddingHorizontal: 20, gap: 8 }}>
-            {TAGS.map(tag => (
-              <TouchableOpacity
-                key={tag}
-                className="bg-brand-surface border border-white/10 px-4 py-2 rounded-full"
-                activeOpacity={0.75}
-              >
-                <Text className="text-brand-muted text-xs font-semibold">{tag}</Text>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
-
-          {/* Trending Card */}
-          <View className="mx-5 mb-6 rounded-2xl overflow-hidden" style={{ backgroundColor: '#1A2E20' }}>
-            <View className="p-5">
-              <View className="flex-row items-center mb-2">
-                <View className="bg-brand-green px-2.5 py-1 rounded-full mr-2">
-                  <Text className="text-white text-[10px] font-bold uppercase tracking-wide">TRENDING</Text>
+          {/* Trending Tags */}
+          <View style={{ marginBottom: 28, paddingHorizontal: 20 }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 14 }}>
+              <Tag size={16} color="#e9c349" />
+              <Text style={{ color: '#dfe4e0', fontWeight: '800', fontSize: 16 }}>Trending Topics</Text>
+            </View>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8 }}>
+              {TRENDING_TAGS.map(tag => (
+                <View key={tag} style={{ backgroundColor: '#1c211e', paddingHorizontal: 14, paddingVertical: 9, borderRadius: 999, borderWidth: 1, borderColor: 'rgba(255,255,255,0.06)' }}>
+                  <Text style={{ color: '#bfc9c4', fontSize: 13, fontWeight: '600' }}>{tag}</Text>
                 </View>
-                <Text className="text-brand-muted text-xs">1.2k playing now</Text>
+              ))}
+            </ScrollView>
+          </View>
+
+          {/* Trending This Week */}
+          <View style={{ paddingHorizontal: 20, marginBottom: 28 }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 14 }}>
+              <Star size={16} color="#e9c349" />
+              <Text style={{ color: '#dfe4e0', fontWeight: '800', fontSize: 16 }}>Trending This Week</Text>
+            </View>
+            <View style={{ backgroundColor: '#1c211e', borderRadius: 24, overflow: 'hidden' }}>
+              <View style={{ height: 140, backgroundColor: '#1f3a1f', alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 56 }}>🌍</Text>
               </View>
-              <Text className="text-brand-text text-xl font-bold mb-1">
-                Afrobeats: From{'\n'}Fela to Burna
-              </Text>
-              <Text className="text-brand-muted text-xs leading-relaxed mb-4">
-                Test your knowledge on the evolution of Nigeria's biggest cultural export.
-              </Text>
-              <TouchableOpacity
-                className="bg-brand-green self-start px-5 py-2.5 rounded-full"
-                onPress={() => router.push('/(tabs)/arena')}
-              >
-                <Text className="text-white font-bold text-sm">Start Trivia</Text>
-              </TouchableOpacity>
+              <View style={{ padding: 18 }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+                  <View style={{ backgroundColor: 'rgba(233,195,73,0.2)', paddingHorizontal: 10, paddingVertical: 4, borderRadius: 999 }}>
+                    <Text style={{ color: '#e9c349', fontSize: 9, fontWeight: '700', textTransform: 'uppercase', letterSpacing: 1 }}>TRENDING #1</Text>
+                  </View>
+                </View>
+                <Text style={{ color: '#dfe4e0', fontWeight: '800', fontSize: 18, marginBottom: 6 }}>Culture of the 36 States</Text>
+                <Text style={{ color: '#bfc9c4', fontSize: 12, lineHeight: 18, marginBottom: 16 }}>
+                  Explore the unique traditions, languages, and landmarks that define every Nigerian state.
+                </Text>
+                <TouchableOpacity
+                  onPress={() => router.push('/(tabs)/arena')}
+                  style={{ backgroundColor: '#59de9b', paddingVertical: 12, borderRadius: 14, alignItems: 'center' }}
+                >
+                  <Text style={{ color: '#0f1412', fontWeight: '800', fontSize: 14 }}>Explore Pack →</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
 
-          {/* Did You Know */}
-          <View className="mx-5 mb-6 p-5 rounded-2xl border border-brand-gold/20" style={{ backgroundColor: '#1C1A0F' }}>
-            <Text className="text-brand-gold text-sm font-bold mb-2">💡 Did You Know?</Text>
-            <Text className="text-brand-muted text-sm leading-relaxed italic">
-              "Nigeria is home to the single largest diversity of butterflies in the world, with over 1,000 species recorded in the Cross River National Park."
+          {/* Cultural Fact */}
+          <View style={{ marginHorizontal: 20, marginBottom: 28, backgroundColor: '#1c1800', borderRadius: 20, padding: 20, borderWidth: 1, borderColor: 'rgba(233,195,73,0.15)' }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 10 }}>
+              <BookOpen size={16} color="#e9c349" />
+              <Text style={{ color: '#e9c349', fontWeight: '700', fontSize: 13 }}>Cultural Fact</Text>
+            </View>
+            <Text style={{ color: '#bfc9c4', fontSize: 13, lineHeight: 20, fontStyle: 'italic' }}>
+              "The Benin Kingdom, one of the oldest in West Africa, produced intricate bronze plaques and sculptures that are now featured in museums across the world."
             </Text>
-            <Text className="text-brand-muted text-[10px] mt-2">📚 Source: Nature Nigeria</Text>
           </View>
 
           {/* Weekly Challenge */}
-          <View className="mx-5 mb-6 bg-brand-surface rounded-2xl p-5 border border-white/5">
-            <View className="flex-row justify-between items-center mb-2">
-              <Text className="text-brand-text font-bold text-sm">Weekly Challenge</Text>
-              <Text className="text-brand-green font-bold text-sm">#32</Text>
+          <View style={{ marginHorizontal: 20, marginBottom: 28, backgroundColor: '#1c211e', borderRadius: 20, padding: 20 }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 14 }}>
+              <Calendar size={16} color="#59de9b" />
+              <Text style={{ color: '#dfe4e0', fontWeight: '800', fontSize: 16 }}>Weekly Challenge</Text>
             </View>
-            <Text className="text-brand-muted text-xs mb-3">Master the '94 Eagles team stats to win exclusive badges.</Text>
-            <View className="h-2 bg-brand-bg rounded-full overflow-hidden">
-              <View className="h-full bg-brand-green rounded-full w-[85%]" />
+            <Text style={{ color: '#bfc9c4', fontSize: 13, marginBottom: 14 }}>
+              Complete 5 different packs this week to earn the "Cultural Pioneer" badge.
+            </Text>
+            <View style={{ flexDirection: 'row', gap: 6, marginBottom: 8 }}>
+              {[1, 2, 3, 4, 5].map(i => (
+                <View key={i} style={{ flex: 1, height: 4, borderRadius: 2, backgroundColor: i <= 2 ? '#59de9b' : '#262b29' }} />
+              ))}
             </View>
-            <Text className="text-brand-muted text-[10px] mt-1 text-right">85% of players completed</Text>
+            <Text style={{ color: '#89938f', fontSize: 11 }}>2 of 5 completed · 4 days remaining</Text>
           </View>
 
           {/* Pack Previews */}
-          <View className="px-5">
-            <Text className="text-brand-text font-bold text-base mb-4">Explore Packs</Text>
+          <View style={{ paddingHorizontal: 20 }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 }}>
+              <Text style={{ color: '#dfe4e0', fontWeight: '800', fontSize: 16 }}>Featured Packs</Text>
+              <TouchableOpacity onPress={() => router.push('/(tabs)/boutique')} style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+                <Text style={{ color: '#e9c349', fontWeight: '700', fontSize: 12 }}>Browse All</Text>
+                <ChevronRight size={14} color="#e9c349" />
+              </TouchableOpacity>
+            </View>
             {PACKS.map(pack => (
-              <View
-                key={pack.id}
-                className="rounded-2xl overflow-hidden mb-4 border border-white/5"
-              >
-                <View className="h-36" style={{ backgroundColor: pack.color }}>
-                  <View className="flex-1 items-center justify-center">
-                    <Text className="text-white/20 text-6xl font-black">{pack.title.charAt(0)}</Text>
-                  </View>
+              <View key={pack.id} style={{ backgroundColor: '#1c211e', borderRadius: 20, overflow: 'hidden', marginBottom: 14 }}>
+                <View style={{ height: 80, backgroundColor: pack.color, alignItems: 'center', justifyContent: 'center' }}>
+                  <Text style={{ fontSize: 36 }}>{pack.icon}</Text>
                 </View>
-                <View className="bg-brand-surface p-4">
-                  <Text className="text-brand-text font-bold text-base mb-0.5">{pack.title}</Text>
-                  <Text className="text-brand-muted text-xs mb-3">
-                    {pack.questions} Questions • {pack.difficulty}
-                  </Text>
-                  <TouchableOpacity
-                    className="border border-brand-green/40 py-2.5 rounded-xl items-center"
-                    onPress={() => router.push('/(tabs)/arena')}
-                    activeOpacity={0.85}
-                  >
-                    <Text className="text-brand-green font-bold text-xs tracking-wide">Preview Pack</Text>
-                  </TouchableOpacity>
+                <View style={{ padding: 14 }}>
+                  <Text style={{ color: '#dfe4e0', fontWeight: '800', fontSize: 15, marginBottom: 3 }}>{pack.title}</Text>
+                  <Text style={{ color: '#bfc9c4', fontSize: 12 }}>{pack.desc}</Text>
                 </View>
               </View>
             ))}

@@ -2,7 +2,10 @@ import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import { Star, Coins, Package, Zap, X as XIcon, SkipForward, Lightbulb, ShoppingBag } from 'lucide-react-native';
+import DrawerMenu, { type DrawerHandle } from '../../components/DrawerMenu';
+import AppHeader from '../../components/AppHeader';
 
 // ─── Stitch Design Tokens ─────────────────────────────────────────────────────
 // surface: #0f1412 | surface_container: #1c211e | surface_container_high: #262b29
@@ -66,20 +69,23 @@ const AVATARS = [
 
 export default function BoutiqueScreen() {
   const router = useRouter();
+  const drawer = useRef<DrawerHandle>(null);
   const [activeTab, setActiveTab] = useState(0);
 
   return (
     <View style={{ flex: 1, backgroundColor: '#0f1412' }}>
+      <DrawerMenu ref={drawer} />
       <SafeAreaView edges={['top']} style={{ flex: 1 }}>
-        {/* Header */}
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 20, paddingVertical: 12 }}>
-          <Text style={{ fontSize: 24, fontWeight: '800', color: '#dfe4e0', letterSpacing: -0.5 }}>
-            The Boutique
-          </Text>
-          <TouchableOpacity style={{ backgroundColor: '#1c211e', paddingHorizontal: 12, paddingVertical: 6, borderRadius: 20 }}>
-            <Text style={{ color: '#e9c349', fontSize: 12, fontWeight: '700' }}>🪙 2,450</Text>
-          </TouchableOpacity>
-        </View>
+        <AppHeader
+          title="The Boutique"
+          drawerRef={drawer}
+          rightSlot={
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6, backgroundColor: '#1c211e', paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12 }}>
+              <Coins size={14} color="#e9c349" />
+              <Text style={{ color: '#e9c349', fontSize: 12, fontWeight: '700' }}>2,450</Text>
+            </View>
+          }
+        />
 
         <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 40 }}>
           {/* Naija Gold Promo Banner */}
@@ -91,9 +97,9 @@ export default function BoutiqueScreen() {
           >
             <View style={{ flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between' }}>
               <View style={{ flex: 1 }}>
-                <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 8 }}>
-                  <Text style={{ fontSize: 20 }}>⭐</Text>
-                  <Text style={{ color: '#e9c349', fontWeight: '800', fontSize: 18, marginLeft: 6 }}>Naija Gold</Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 8, gap: 8 }}>
+                  <Star size={20} color="#e9c349" />
+                  <Text style={{ color: '#e9c349', fontWeight: '800', fontSize: 18 }}>Naija Gold</Text>
                 </View>
                 <Text style={{ color: '#dfe4e0', fontSize: 13, lineHeight: 20, marginBottom: 14 }}>
                   Unlock unlimited arena entries, double coin rewards, and the legendary Golden Eagle avatar frame. Cancel anytime.
@@ -112,7 +118,9 @@ export default function BoutiqueScreen() {
                   </LinearGradient>
                 </TouchableOpacity>
               </View>
-              <Text style={{ fontSize: 48, marginLeft: 12 }}>🦅</Text>
+              <View style={{ alignItems: 'center', justifyContent: 'center', width: 56, height: 56, borderRadius: 28, backgroundColor: 'rgba(233,195,73,0.15)', marginLeft: 12 }}>
+                <Star size={28} color="#e9c349" />
+              </View>
             </View>
           </LinearGradient>
 
@@ -213,14 +221,14 @@ export default function BoutiqueScreen() {
           {activeTab === 2 && (
             <View style={{ paddingHorizontal: 20, paddingTop: 10 }}>
               {[
-                { icon: '⏱', name: 'Time Freeze', desc: 'Pause the countdown for 10 seconds', price: '₦200', qty: 'x3' },
-                { icon: '❌', name: 'Eliminate 2', desc: 'Remove two wrong answers from the board', price: '₦150', qty: 'x5' },
-                { icon: '🔁', name: 'Skip Question', desc: 'Skip any question without penalty', price: '₦250', qty: 'x2' },
-                { icon: '2×', name: 'Double XP', desc: 'Earn twice the experience for one full game', price: '₦500', qty: 'x1' },
+                { Icon: Zap,         name: 'Time Freeze', desc: 'Pause the countdown for 10 seconds', price: '₦200', qty: 'x3' },
+                { Icon: XIcon,       name: 'Eliminate 2', desc: 'Remove two wrong answers from the board', price: '₦150', qty: 'x5' },
+                { Icon: SkipForward, name: 'Skip Question', desc: 'Skip any question without penalty', price: '₦250', qty: 'x2' },
+                { Icon: Package,     name: 'Double XP', desc: 'Earn twice the experience for one full game', price: '₦500', qty: 'x1' },
               ].map(b => (
                 <View key={b.name} style={{ backgroundColor: '#1c211e', borderRadius: 20, padding: 16, marginBottom: 14, flexDirection: 'row', alignItems: 'center' }}>
                   <View style={{ width: 52, height: 52, borderRadius: 14, backgroundColor: '#262b29', alignItems: 'center', justifyContent: 'center', marginRight: 14 }}>
-                    <Text style={{ fontSize: 24 }}>{b.icon}</Text>
+                    <b.Icon size={24} color="#59de9b" />
                   </View>
                   <View style={{ flex: 1 }}>
                     <Text style={{ color: '#dfe4e0', fontWeight: '800', fontSize: 14 }}>{b.name}</Text>
@@ -237,7 +245,10 @@ export default function BoutiqueScreen() {
 
           {/* Daily Gold Nugget */}
           <View style={{ marginHorizontal: 20, marginTop: 8, backgroundColor: '#1c1800', borderRadius: 16, padding: 16, borderWidth: 1, borderColor: 'rgba(233,195,73,0.15)' }}>
-            <Text style={{ color: '#e9c349', fontWeight: '700', fontSize: 12, marginBottom: 4 }}>💡 Daily Gold Nugget</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6, marginBottom: 6 }}>
+              <Lightbulb size={14} color="#e9c349" />
+              <Text style={{ color: '#e9c349', fontWeight: '700', fontSize: 12 }}>Daily Gold Nugget</Text>
+            </View>
             <Text style={{ color: '#bfc9c4', fontSize: 12, fontStyle: 'italic', lineHeight: 18 }}>
               "Did you know Nigeria has over 500 ethnic groups and languages?"
             </Text>

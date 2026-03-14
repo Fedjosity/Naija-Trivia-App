@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Trophy Room | Daily Naija Trivia</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f1412;
+            color: #dfe4e0;
+            overflow-x: hidden;
+        }
+        .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .ankara-overlay {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l15 30-15 30L15 30z' fill='%2359de9b' fill-opacity='0.03'/%3E%3C/svg%3E");
+        }
+        .glass-card {
+            background: rgba(53, 58, 56, 0.4);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(223, 228, 224, 0.1);
+        }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #e9c349 0%, #af8d11 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .royal-shadow {
+            box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        /* Custom scrollbar for premium feel */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0f1412; }
+        ::-webkit-scrollbar-thumb { background: #313633; border-radius: 10px; }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "background": "#0f1412",
+              "inverse-primary": "#006d43",
+              "primary-fixed": "#78fbb6",
+              "on-tertiary-fixed": "#221b00",
+              "on-surface": "#dfe4e0",
+              "on-error": "#690005",
+              "outline-variant": "#3f4945",
+              "surface-bright": "#353a38",
+              "tertiary-container": "#c8a900",
+              "secondary-fixed": "#ffe088",
+              "tertiary-fixed": "#ffe16d",
+              "on-tertiary-fixed-variant": "#544600",
+              "inverse-surface": "#dfe4e0",
+              "on-primary-fixed": "#002111",
+              "surface-container-highest": "#313633",
+              "secondary-fixed-dim": "#e9c349",
+              "on-secondary-container": "#342800",
+              "primary-container": "#004e2f",
+              "secondary-container": "#af8d11",
+              "on-secondary": "#3c2f00",
+              "on-tertiary": "#3a3000",
+              "on-error-container": "#ffdad6",
+              "on-background": "#dfe4e0",
+              "secondary": "#e9c349",
+              "primary": "#59de9b",
+              "surface-container-high": "#262b29",
+              "on-primary-fixed-variant": "#005232",
+              "on-primary": "#003921",
+              "surface-container-low": "#181d1a",
+              "tertiary-fixed-dim": "#e9c400",
+              "error-container": "#93000a",
+              "inverse-on-surface": "#2c322f",
+              "surface-container-lowest": "#0a0f0d",
+              "on-secondary-fixed-variant": "#574500",
+              "surface-container": "#1c211e",
+              "surface-dim": "#0f1412",
+              "on-surface-variant": "#bfc9c4",
+              "surface": "#0f1412",
+              "tertiary": "#e9c400",
+              "on-tertiary-container": "#4b3e00",
+              "primary-fixed-dim": "#59de9b",
+              "on-primary-container": "#3ec787",
+              "outline": "#89938f",
+              "error": "#ffb4ab",
+              "surface-tint": "#59de9b",
+              "on-secondary-fixed": "#241a00",
+              "surface-variant": "#313633"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="ankara-overlay min-h-screen pb-24">
+<!-- Top Navigation Bar -->
+<nav class="sticky top-0 z-50 flex items-center justify-between px-6 py-4 glass-card">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface">menu</span>
+<h1 class="text-lg font-headline font-bold text-on-surface">Daily Naija Trivia</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined text-on-surface">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-secondary rounded-full"></span>
+</div>
+</div>
+</nav>
+<main class="max-w-5xl mx-auto px-6 pt-10">
+<!-- Profile Hero Section -->
+<section class="relative mb-16">
+<div class="flex flex-col md:flex-row items-center gap-8">
+<div class="relative">
+<div class="w-32 h-32 rounded-full border-4 border-secondary p-1 royal-shadow">
+<img alt="User Profile" class="w-full h-full object-cover rounded-full" data-alt="Close up portrait of a confident Nigerian woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBR9xES3sVFTZTnWy1wR3Wm0Sd7w2DBaClp_uewwyLv6e5RV4FX8N_SM76MCmzGWadMTZGuZ1G2aMGGsNzvbGR1ogSseq8j0TheiP2tvbwaVRm6QnfAS76hkwV5bTPYALTswr0I9vJ5qCUpb85o72jA4mVbzDG5W1nzjUL8bXwNq_KEDoADfWAfKteZmy4dyqLezUKSlIaDd0MdmqMof5zgXUhpFy2xgSRB0jGZvKA0nCb47EQ5fvsmdPeUqhBbhf0xp5ehSCnVUWL8"/>
+</div>
+<div class="absolute -bottom-2 -right-2 bg-secondary text-on-secondary px-3 py-1 rounded-full text-xs font-bold font-headline">
+                        LVL 42
+                    </div>
+</div>
+<div class="text-center md:text-left">
+<h2 class="text-4xl font-headline font-extrabold text-on-surface mb-1">Tunde "The Oracle"</h2>
+<p class="text-on-surface-variant flex items-center justify-center md:justify-start gap-2">
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
+                        Grandmaster of Yoruba Folklore
+                    </p>
+<div class="flex gap-6 mt-4 justify-center md:justify-start">
+<div>
+<p class="text-2xl font-headline font-bold text-primary">12.4k</p>
+<p class="text-xs uppercase tracking-widest text-on-surface-variant font-medium">Points</p>
+</div>
+<div class="w-px h-10 bg-outline-variant opacity-30"></div>
+<div>
+<p class="text-2xl font-headline font-bold text-primary">15</p>
+<p class="text-xs uppercase tracking-widest text-on-surface-variant font-medium">Badges</p>
+</div>
+<div class="w-px h-10 bg-outline-variant opacity-30"></div>
+<div>
+<p class="text-2xl font-headline font-bold text-primary">#3</p>
+<p class="text-xs uppercase tracking-widest text-on-surface-variant font-medium">Rank</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bento Grid: Key Achievements -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+<div class="md:col-span-2 bg-surface-container-low rounded-xl p-8 border-t border-white/5 relative overflow-hidden group">
+<div class="absolute -right-10 -bottom-10 opacity-10 group-hover:scale-110 transition-transform duration-700">
+<span class="material-symbols-outlined text-[180px] text-secondary">workspace_premium</span>
+</div>
+<h3 class="text-on-surface-variant text-sm font-bold uppercase tracking-widest mb-4">Current Streak</h3>
+<div class="flex items-baseline gap-2">
+<span class="text-6xl font-headline font-extrabold text-primary">28</span>
+<span class="text-xl font-headline text-on-surface-variant">Days</span>
+</div>
+<p class="mt-4 text-on-surface-variant max-w-xs">You're in the top 1% of players this month. Keep the fire burning to unlock the 'Ancient Historian' title.</p>
+<div class="mt-8 flex gap-2">
+<div class="h-1.5 flex-1 bg-primary rounded-full"></div>
+<div class="h-1.5 flex-1 bg-primary rounded-full"></div>
+<div class="h-1.5 flex-1 bg-primary rounded-full"></div>
+<div class="h-1.5 flex-1 bg-surface-container-highest rounded-full"></div>
+</div>
+</div>
+<div class="bg-secondary-container rounded-xl p-8 relative overflow-hidden flex flex-col justify-between">
+<div class="z-10">
+<h3 class="text-on-secondary-container text-sm font-bold uppercase tracking-widest mb-2">Vault Value</h3>
+<p class="text-4xl font-headline font-extrabold text-on-secondary-container">₦85,200</p>
+</div>
+<div class="mt-6 z-10">
+<button class="w-full bg-on-secondary-container text-secondary-container font-bold py-3 rounded-lg text-sm hover:opacity-90 transition-opacity">
+                        REDEEM PRIZES
+                    </button>
+</div>
+<!-- Abstract pattern background -->
+<div class="absolute inset-0 opacity-20 pointer-events-none">
+<div class="w-full h-full bg-gradient-to-br from-white/20 to-transparent"></div>
+</div>
+</div>
+</div>
+<!-- The Trophy Timeline -->
+<section class="mb-20">
+<div class="flex items-center justify-between mb-10">
+<h3 class="text-3xl font-headline font-bold text-on-surface">Trophy Timeline</h3>
+<span class="text-secondary font-medium flex items-center gap-2 cursor-pointer">
+                    View All <span class="material-symbols-outlined">arrow_forward</span>
+</span>
+</div>
+<div class="relative">
+<!-- Vertical Line -->
+<div class="absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-gradient-to-b from-primary via-surface-container-highest to-transparent opacity-20 hidden md:block"></div>
+<div class="space-y-16">
+<!-- Achievement 1 -->
+<div class="relative flex flex-col md:flex-row items-center justify-between group">
+<div class="md:w-5/12 text-center md:text-right">
+<h4 class="text-xl font-headline font-bold text-on-surface mb-2">The Oba's Crown</h4>
+<p class="text-on-surface-variant text-sm">Awarded for 100% accuracy in the "Kingdoms of the South" series.</p>
+<span class="inline-block mt-3 text-xs font-bold text-primary px-3 py-1 bg-primary/10 rounded-full italic">Oct 12, 2023</span>
+</div>
+<div class="relative z-10 my-6 md:my-0">
+<div class="w-24 h-24 bg-surface-container-highest rounded-full flex items-center justify-center border-2 border-secondary/30 royal-shadow group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-4xl text-secondary" style="font-variation-settings: 'FILL' 1;">theater_comedy</span>
+</div>
+</div>
+<div class="md:w-5/12 hidden md:block"></div>
+</div>
+<!-- Achievement 2 -->
+<div class="relative flex flex-col md:flex-row items-center justify-between group">
+<div class="md:w-5/12 hidden md:block"></div>
+<div class="relative z-10 my-6 md:my-0">
+<div class="w-24 h-24 bg-surface-container-highest rounded-full flex items-center justify-center border-2 border-primary/30 royal-shadow group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-4xl text-primary" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+</div>
+</div>
+<div class="md:w-5/12 text-center md:text-left">
+<h4 class="text-xl font-headline font-bold text-on-surface mb-2">Jollof Connoisseur</h4>
+<p class="text-on-surface-variant text-sm">Mastered the "Culinary Geography" challenge without a single mistake.</p>
+<span class="inline-block mt-3 text-xs font-bold text-primary px-3 py-1 bg-primary/10 rounded-full italic">Sep 28, 2023</span>
+</div>
+</div>
+<!-- Achievement 3 -->
+<div class="relative flex flex-col md:flex-row items-center justify-between group">
+<div class="md:w-5/12 text-center md:text-right">
+<h4 class="text-xl font-headline font-bold text-on-surface mb-2">Nollywood Legend</h4>
+<p class="text-on-surface-variant text-sm">Successfully identified 50 classic movies from the 90s era.</p>
+<span class="inline-block mt-3 text-xs font-bold text-primary px-3 py-1 bg-primary/10 rounded-full italic">Aug 15, 2023</span>
+</div>
+<div class="relative z-10 my-6 md:my-0">
+<div class="w-24 h-24 bg-surface-container-highest rounded-full flex items-center justify-center border-2 border-secondary/30 royal-shadow group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-4xl text-secondary" style="font-variation-settings: 'FILL' 1;">movie</span>
+</div>
+</div>
+<div class="md:w-5/12 hidden md:block"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Gallery of Locked Milestones -->
+<section class="mb-12">
+<h3 class="text-xl font-headline font-bold text-on-surface mb-6">Upcoming Milestones</h3>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-surface-container-low p-6 rounded-xl flex flex-col items-center opacity-40 grayscale group hover:grayscale-0 hover:opacity-100 transition-all cursor-help">
+<span class="material-symbols-outlined text-3xl mb-3">music_note</span>
+<span class="text-xs font-bold text-center">Afrobeats Titan</span>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl flex flex-col items-center opacity-40 grayscale group hover:grayscale-0 hover:opacity-100 transition-all cursor-help">
+<span class="material-symbols-outlined text-3xl mb-3">map</span>
+<span class="text-xs font-bold text-center">State Explorer</span>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl flex flex-col items-center opacity-40 grayscale group hover:grayscale-0 hover:opacity-100 transition-all cursor-help">
+<span class="material-symbols-outlined text-3xl mb-3">architecture</span>
+<span class="text-xs font-bold text-center">City Architect</span>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl flex flex-col items-center opacity-40 grayscale group hover:grayscale-0 hover:opacity-100 transition-all cursor-help">
+<span class="material-symbols-outlined text-3xl mb-3">stadium</span>
+<span class="text-xs font-bold text-center">Super Eagle</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 z-50 bg-surface-container-low border-t border-outline-variant/20 px-4 py-3">
+<div class="max-w-xl mx-auto flex justify-between items-center">
+<div class="flex flex-col items-center gap-1 opacity-50">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-medium">Dashboard</span>
+</div>
+<div class="flex flex-col items-center gap-1 opacity-50">
+<span class="material-symbols-outlined">sports_esports</span>
+<span class="text-[10px] font-medium">Arena</span>
+</div>
+<div class="flex flex-col items-center gap-1 opacity-50">
+<span class="material-symbols-outlined">explore</span>
+<span class="text-[10px] font-medium">Explorer</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">emoji_events</span>
+<span class="text-[10px] font-bold">Trophy Room</span>
+</div>
+</div>
+</nav>
+</body></html>

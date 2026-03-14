@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#59de9b",
+              "tertiary-fixed": "#ffe16d",
+              "tertiary-container": "#c8a900",
+              "secondary-fixed": "#ffe088",
+              "on-secondary": "#3c2f00",
+              "outline-variant": "#3f4945",
+              "secondary-fixed-dim": "#e9c349",
+              "surface-variant": "#313633",
+              "surface": "#0f1412",
+              "secondary": "#e9c349",
+              "primary-fixed-dim": "#59de9b",
+              "on-primary": "#003921",
+              "tertiary": "#e9c400",
+              "on-tertiary-fixed": "#221b00",
+              "on-secondary-fixed": "#241a00",
+              "surface-container-low": "#181d1a",
+              "surface-container": "#1c211e",
+              "inverse-surface": "#dfe4e0",
+              "on-error-container": "#ffdad6",
+              "primary-container": "#004e2f",
+              "tertiary-fixed-dim": "#e9c400",
+              "primary-fixed": "#78fbb6",
+              "on-secondary-fixed-variant": "#574500",
+              "surface-container-highest": "#313633",
+              "on-error": "#690005",
+              "secondary-container": "#af8d11",
+              "on-tertiary-fixed-variant": "#544600",
+              "surface-container-high": "#262b29",
+              "inverse-primary": "#006d43",
+              "on-primary-container": "#3ec787",
+              "inverse-on-surface": "#2c322f",
+              "on-surface": "#dfe4e0",
+              "surface-dim": "#0f1412",
+              "background": "#0f1412",
+              "surface-container-lowest": "#0a0f0d",
+              "on-primary-fixed-variant": "#005232",
+              "on-tertiary-container": "#4b3e00",
+              "on-primary-fixed": "#002111",
+              "outline": "#89938f",
+              "on-surface-variant": "#bfc9c4",
+              "surface-tint": "#59de9b",
+              "error": "#ffb4ab",
+              "on-tertiary": "#3a3000",
+              "on-secondary-container": "#342800",
+              "error-container": "#93000a",
+              "surface-bright": "#353a38",
+              "on-background": "#dfe4e0"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0f1412;
+            color: #dfe4e0;
+            font-family: 'Inter', sans-serif;
+        }
+        .ankara-overlay {
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l30 30-30 30L0 30z' fill='%2359de9b' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+        }
+        .glass-search {
+            background: rgba(53, 58, 56, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(137, 147, 143, 0.15);
+        }
+        .text-shadow-gold {
+            text-shadow: 0 0 12px rgba(233, 195, 73, 0.3);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-24">
+<div class="ankara-overlay"></div>
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 bg-surface/80 backdrop-blur-md px-4 py-3 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-headline font-bold text-lg tracking-tight text-on-surface">Daily Naija Trivia</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-on-surface">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<main class="relative z-10 px-6 max-w-5xl mx-auto pt-12">
+<!-- Hero Search Section -->
+<section class="text-center mb-16">
+<h2 class="font-headline text-4xl md:text-5xl font-bold mb-8 text-on-surface leading-tight">
+                Discover the <span class="text-secondary text-shadow-gold">Naija Essence</span>
+</h2>
+<div class="relative max-w-2xl mx-auto">
+<div class="glass-search flex items-center px-6 py-4 rounded-full transition-all focus-within:ring-2 focus-within:ring-primary/30">
+<span class="material-symbols-outlined text-on-surface-variant mr-4">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-on-surface w-full placeholder-on-surface-variant text-lg" placeholder="Search trivia packs, culture, history..." type="text"/>
+</div>
+</div>
+<div class="flex flex-wrap justify-center gap-3 mt-8">
+<span class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant text-sm border border-outline-variant/20">#FelaKuti</span>
+<span class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant text-sm border border-outline-variant/20">#90sSuperEagles</span>
+<span class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant text-sm border border-outline-variant/20">#LagosNightlife</span>
+<span class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant text-sm border border-outline-variant/20">#NollywoodClassics</span>
+</div>
+</section>
+<!-- Discovery Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Trending Now - Large Feature Card -->
+<div class="md:col-span-8 group relative overflow-hidden rounded-xl bg-surface-container-low p-1">
+<div class="relative h-80 w-full rounded-lg overflow-hidden">
+<img alt="African Music Heritage" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700" data-alt="Vibrant close up of traditional African percussion instruments" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVaQnyzBU42o1eIvzqHOb7enSAnttHmrJpoJdZSsmBp56etB8Wl1gLwSIli4gKN_7BozJ9wBza9u0Ktvfk-Ute6a4eRFhiZ1rNN-ToJeugLAoCQuTmPncSsTlNqdxqPVD22uO5CzjSfMCEFLGgSMBKph_hhowOTrwf3VHsJTGaey5jiRgNemIemQrwlQZrhXQKSc2i9g9KTC1vHmLaD2m6ARycM6r6W1Wluvo8DXhs_oK_FcGzEWPGAP6LdufVnsUw4vHwvjTkx4Ti"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-surface-container-low/40 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-8">
+<div class="flex items-center gap-2 mb-3">
+<span class="px-2 py-0.5 rounded bg-primary/20 text-primary text-xs font-bold uppercase tracking-widest">Trending</span>
+<span class="text-on-surface-variant text-sm">1.2k playing now</span>
+</div>
+<h3 class="font-headline text-3xl font-bold text-on-surface mb-2">Afrobeats: From Fela to Burna</h3>
+<p class="text-on-surface-variant max-w-md">Test your knowledge on the evolution of Nigeria's biggest cultural export.</p>
+<button class="mt-6 px-8 py-3 bg-gradient-to-r from-primary to-primary-container text-on-primary-fixed-variant font-bold rounded-xl shadow-lg hover:shadow-primary/20 transition-all">
+                            Start Trivia
+                        </button>
+</div>
+</div>
+</div>
+<!-- "Did You Know" Fact Card - Glassmorphism -->
+<div class="md:col-span-4 flex flex-col gap-6">
+<div class="bg-surface-container-high/40 backdrop-blur-xl border border-outline-variant/10 rounded-xl p-6 flex-1 flex flex-col justify-between">
+<div>
+<div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-secondary">lightbulb</span>
+</div>
+<h4 class="font-headline font-semibold text-secondary mb-2">Did You Know?</h4>
+<p class="text-on-surface leading-relaxed italic">"Nigeria is home to the single largest diversity of butterflies in the world, with over 1,000 species recorded in the Cross River National Park."</p>
+</div>
+<div class="mt-6 flex items-center gap-2 text-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">history_edu</span>
+<span>Source: Nature Nigeria</span>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-6 border border-outline-variant/10">
+<div class="flex justify-between items-center mb-4">
+<h4 class="font-headline font-semibold text-on-surface">Weekly Challenge</h4>
+<span class="text-primary font-bold">#32</span>
+</div>
+<p class="text-sm text-on-surface-variant mb-4">Master the '94 Eagles team stats to win exclusive badges.</p>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-primary w-2/3 h-full"></div>
+</div>
+<div class="mt-2 text-[10px] text-on-surface-variant text-right">65% of players completed</div>
+</div>
+</div>
+<!-- More Results - Bento Grid Style -->
+<div class="md:col-span-4 rounded-xl bg-surface-container-low overflow-hidden hover:bg-surface-container-high transition-colors">
+<div class="h-40 bg-surface-container-highest relative">
+<img alt="Nollywood Cinema" class="w-full h-full object-cover opacity-40" data-alt="Vintage film camera and classic movie posters" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCknVa1d3pLwsrhkGqlWgF1SgiOwWNVoZks3wPQh17X5ieRru5HkLg8HCUYnQdoNI_ZhQqa5RbnDmCEdjJLsMD9BLVPSfjHBktmzYwXihDB22eXrfcj6RhryWZOsXBVgrFthCKraM2X0qDTqrDzlzVq-8A64l8QohsmKCL4jpvBRTsjPkZwNqyvfOUYxy9oQnAjWwM2axNClJsKcnIh8uegytHTbWSVhTDrAFIzfzl9aR8j3kjdjelqIgWLcxZj9Fof_Peg3QKgViZ9"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low to-transparent"></div>
+</div>
+<div class="p-5">
+<h5 class="font-headline font-semibold text-on-surface mb-1">90s Nollywood</h5>
+<p class="text-xs text-on-surface-variant mb-4">25 Questions • Expert Level</p>
+<button class="w-full py-2 rounded-lg border border-outline-variant text-on-surface text-sm hover:bg-primary/10 hover:border-primary transition-all">Preview Pack</button>
+</div>
+</div>
+<div class="md:col-span-4 rounded-xl bg-surface-container-low overflow-hidden hover:bg-surface-container-high transition-colors">
+<div class="h-40 bg-surface-container-highest relative">
+<img alt="Nigerian Landmarks" class="w-full h-full object-cover opacity-40" data-alt="Zuma Rock landscape with dramatic sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAW9KZCfVSJ-Fk5xVMS2NmEicRtnXh13qX85cscZFcapAJFCWLs3mOtovYKZbNy2qEMl-VVeRbp5SB9Gb3xJVOx0C2WSLgiFSrc1ngNABijXP3LFZWvJQ8DCnEz-NxkZ6bEPhFPMyn9VZBfLvNwCWavFYQwjytdQxm5PL_pdCtp5PPvm-9vMGZmMzEZNubyPwgf6LvItnIQ6-JZaCXXmZaCXLwcRXKvABGYGILxR9_w6d9cXbp1tXa_NsHcyKXB2oThmvJ43e4g_3aB"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low to-transparent"></div>
+</div>
+<div class="p-5">
+<h5 class="font-headline font-semibold text-on-surface mb-1">Landmarks &amp; Geography</h5>
+<p class="text-xs text-on-surface-variant mb-4">15 Questions • Beginner</p>
+<button class="w-full py-2 rounded-lg border border-outline-variant text-on-surface text-sm hover:bg-primary/10 hover:border-primary transition-all">Preview Pack</button>
+</div>
+</div>
+<div class="md:col-span-4 rounded-xl bg-surface-container-low overflow-hidden hover:bg-surface-container-high transition-colors">
+<div class="h-40 bg-surface-container-highest relative">
+<img alt="Nigerian Food Culture" class="w-full h-full object-cover opacity-40" data-alt="Traditional Nigerian jollof rice served in a wooden bowl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyxYmwjy72HUVUl3blF25Y3bkKbhhJWkeulIrFli7jbKgN46eGnEqfyAGAJNx-8lCyJO2dmwhJOde_tVhgay5VEc6d_5pPBL2dCmGuBD3qXQOT7s6GhKLB0j9G1AxHoheqIoZy2swoLy-cEffPLsoRmwVI9kl7hbKPriAL6U1o42Pn3PoSl9ZcuPqb959gZEoNduYmciSqCn0uMaMrNWnAVPRP8UpM51oTLZzV9cc1DTQJ_UR68SbE2fx68XAPsF5Bjh8cWbTuJbIF"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low to-transparent"></div>
+</div>
+<div class="p-5">
+<h5 class="font-headline font-semibold text-on-surface mb-1">The Great Jollof Debate</h5>
+<p class="text-xs text-on-surface-variant mb-4">20 Questions • Casual</p>
+<button class="w-full py-2 rounded-lg border border-outline-variant text-on-surface text-sm hover:bg-primary/10 hover:border-primary transition-all">Preview Pack</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 z-50 bg-surface-container-lowest border-t border-outline-variant/10 px-2">
+<div class="max-w-xl mx-auto flex justify-between items-center py-3">
+<button class="flex flex-col items-center gap-1 flex-1 text-on-surface-variant">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-medium">Dashboard</span>
+</button>
+<button class="flex flex-col items-center gap-1 flex-1 text-on-surface-variant">
+<span class="material-symbols-outlined">sports_esports</span>
+<span class="text-[10px] font-medium">Arena</span>
+</button>
+<button class="flex flex-col items-center gap-1 flex-1 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">explore</span>
+<span class="text-[10px] font-bold">Explorer</span>
+</button>
+<button class="flex flex-col items-center gap-1 flex-1 text-on-surface-variant">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span class="text-[10px] font-medium">Boutique</span>
+</button>
+<button class="flex flex-col items-center gap-1 flex-1 text-on-surface-variant">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="text-[10px] font-medium">Leaderboard</span>
+</button>
+</div>
+</nav>
+</body></html>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Daily Naija Trivia - Cultural Leaderboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#59de9b",
+                        "tertiary-fixed": "#ffe16d",
+                        "tertiary-container": "#c8a900",
+                        "secondary-fixed": "#ffe088",
+                        "on-secondary": "#3c2f00",
+                        "outline-variant": "#3f4945",
+                        "secondary-fixed-dim": "#e9c349",
+                        "surface-variant": "#313633",
+                        "surface": "#0f1412",
+                        "secondary": "#e9c349",
+                        "primary-fixed-dim": "#59de9b",
+                        "on-primary": "#003921",
+                        "tertiary": "#e9c400",
+                        "on-tertiary-fixed": "#221b00",
+                        "on-secondary-fixed": "#241a00",
+                        "surface-container-low": "#181d1a",
+                        "surface-container": "#1c211e",
+                        "inverse-surface": "#dfe4e0",
+                        "on-error-container": "#ffdad6",
+                        "primary-container": "#004e2f",
+                        "tertiary-fixed-dim": "#e9c400",
+                        "primary-fixed": "#78fbb6",
+                        "on-secondary-fixed-variant": "#574500",
+                        "surface-container-highest": "#313633",
+                        "on-error": "#690005",
+                        "secondary-container": "#af8d11",
+                        "on-tertiary-fixed-variant": "#544600",
+                        "surface-container-high": "#262b29",
+                        "inverse-primary": "#006d43",
+                        "on-primary-container": "#3ec787",
+                        "inverse-on-surface": "#2c322f",
+                        "on-surface": "#dfe4e0",
+                        "surface-dim": "#0f1412",
+                        "background": "#0f1412",
+                        "surface-container-lowest": "#0a0f0d",
+                        "on-primary-fixed-variant": "#005232",
+                        "on-tertiary-container": "#4b3e00",
+                        "on-primary-fixed": "#002111",
+                        "outline": "#89938f",
+                        "on-surface-variant": "#bfc9c4",
+                        "surface-tint": "#59de9b",
+                        "error": "#ffb4ab",
+                        "on-tertiary": "#3a3000",
+                        "on-secondary-container": "#342800",
+                        "error-container": "#93000a",
+                        "surface-bright": "#353a38",
+                        "on-background": "#dfe4e0"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .ankara-overlay {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l15 30-15 30L15 30z' fill='%2359de9b' fill-opacity='0.03'/%3E%3C/svg%3E");
+        }
+        .podium-glow {
+            background: radial-gradient(circle at bottom, rgba(233, 195, 73, 0.15) 0%, transparent 70%);
+        }
+        .glass-card {
+            background: rgba(53, 58, 56, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(223, 228, 224, 0.05);
+        }
+        .gold-border {
+            border: 2px solid #e9c349;
+            box-shadow: 0 0 15px rgba(233, 195, 73, 0.3);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body ankara-overlay min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="sticky top-0 z-50 bg-surface/80 backdrop-blur-md px-4 py-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-colors">
+<span class="material-symbols-outlined text-on-surface">menu</span>
+</button>
+<h1 class="font-headline text-xl font-bold tracking-tight">Daily Naija Trivia</h1>
+</div>
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-colors">
+<span class="material-symbols-outlined text-on-surface">account_circle</span>
+</button>
+</header>
+<main class="max-w-4xl mx-auto px-4 py-8">
+<!-- Section Header -->
+<div class="mb-12 text-center">
+<h2 class="font-headline text-4xl font-extrabold text-on-surface mb-2 tracking-tighter uppercase italic">The Prestige</h2>
+<p class="text-on-surface-variant font-medium">Honoring the guardians of Nigerian heritage</p>
+</div>
+<!-- Podium Section -->
+<section class="podium-glow relative flex items-end justify-center gap-2 md:gap-8 mb-16 pt-20">
+<!-- Rank 2 -->
+<div class="flex flex-col items-center flex-1 max-w-[140px]">
+<div class="relative mb-4">
+<div class="w-16 h-16 md:w-20 md:h-20 rounded-full border-2 border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Portrait of a young Nigerian woman smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANdfNZtGke5kkZ_6uMNIsUZHX3OqClY2jY2WGq8TOwS531FHlxxIAWFuKNeBTQ1k0U2JRa7ORAz4JuiLjhmYy9Vy6bKxPlKY8rC5PQHb96zL-0AhBnxEgYFD1gtfic6K9Qhyw8fZp8tGPPIh92KKSfC0tnadFOV2D1I0spj6AB2aZXnK9iIDLMxwscFdDZUoc8Xcj14I5kxZ_D2et8RmcWLOAz5d8cYDW5KXKyFSOC6FtQ6DoSCofX8Sq7FfPCgNSrfbDsqaaLMlWr"/>
+</div>
+<div class="absolute -bottom-2 -right-2 bg-surface-container-highest px-2 py-0.5 rounded-full text-[10px] font-bold border border-outline-variant">LAGOS</div>
+</div>
+<div class="bg-surface-container-low w-full h-32 md:h-40 rounded-t-xl flex flex-col items-center justify-start pt-4 border-t border-x border-outline-variant/20">
+<span class="font-headline text-2xl font-bold text-on-surface-variant">2</span>
+<span class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Adesua</span>
+<span class="text-sm font-headline text-primary">12.4k</span>
+</div>
+</div>
+<!-- Rank 1 -->
+<div class="flex flex-col items-center flex-1 max-w-[180px] -translate-y-8">
+<div class="relative mb-6">
+<div class="absolute -top-10 left-1/2 -translate-x-1/2">
+<span class="material-symbols-outlined text-secondary text-5xl" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+<div class="w-24 h-24 md:w-28 md:h-28 rounded-full gold-border overflow-hidden scale-110">
+<img class="w-full h-full object-cover" data-alt="Portrait of a distinguished Nigerian man in traditional attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6lcn61Eu4vr7CT7WtOzhhWuA-HlnR0rDluF1uwhQihHhtly4-EwaXl2uBXVbnHYSgOZAHOYjxVaBRinC6ZC_5cjak7C2kFztHIY7Hqz9W8jkbvHqPJdzhSN0IVEJTZaqX_bv6zB1is4-dVFeFynzctu4oa1yqsFVNSX-0bXkalWKIDhxYfGFOz3dfbAuuKRyZh8GhXYh9rZIw4G8N_8yBC_eghKVCysQmXVfldypB4xnGcAzugyQcjb2pSiVjDysehqVK-N7C9gec"/>
+</div>
+<div class="absolute -bottom-2 -right-2 bg-secondary text-on-secondary px-3 py-1 rounded-full text-[10px] font-bold shadow-lg">ANAMBRA</div>
+</div>
+<div class="bg-secondary-container/20 w-full h-48 md:h-56 rounded-t-2xl flex flex-col items-center justify-start pt-6 border-t-4 border-secondary/50 glass-card">
+<span class="font-headline text-4xl font-black text-secondary">1</span>
+<span class="text-sm font-bold uppercase tracking-widest text-on-surface">Chukwudi</span>
+<span class="text-lg font-headline font-bold text-secondary">15.8k</span>
+<div class="mt-4 px-3 py-1 bg-secondary/10 rounded-full">
+<span class="text-[10px] text-secondary font-bold uppercase tracking-tighter">Grandmaster</span>
+</div>
+</div>
+</div>
+<!-- Rank 3 -->
+<div class="flex flex-col items-center flex-1 max-w-[140px]">
+<div class="relative mb-4">
+<div class="w-16 h-16 md:w-20 md:h-20 rounded-full border-2 border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Confident woman with vibrant fashion" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBklNrJWKh1HjT-S00kD0L9dNlsqBmjTI_7geguBAQBMYD09THP49LEqpTKva4vGAa5bMp7sJuHolnbVx8URgM1b7DXpMG86Y0sOt6jWm87ezin9dIcLWw5fOX5sPs8sFSUeFNls9TDRRmsudZ-f1IzHFzczseUZp7VGvE7rwuPF_gs5d2EfOS0Bsz7xyU-sFHXzu9vOrratFfCIGaD9lG9H4LD1Y0wL5vI7g6l889DJEQ2_EInV6Mza2TLNze0WqpggSa8mww4ovum"/>
+</div>
+<div class="absolute -bottom-2 -right-2 bg-surface-container-highest px-2 py-0.5 rounded-full text-[10px] font-bold border border-outline-variant">KANO</div>
+</div>
+<div class="bg-surface-container-low w-full h-24 md:h-32 rounded-t-xl flex flex-col items-center justify-start pt-4 border-t border-x border-outline-variant/20">
+<span class="font-headline text-2xl font-bold text-on-surface-variant">3</span>
+<span class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Fatima</span>
+<span class="text-sm font-headline text-primary">11.9k</span>
+</div>
+</div>
+</section>
+<!-- Search & Filter Tab -->
+<div class="flex items-center gap-4 mb-6">
+<div class="flex-1 bg-surface-container-highest rounded-full flex items-center px-4 py-2">
+<span class="material-symbols-outlined text-on-surface-variant mr-3">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full text-on-surface" placeholder="Search for champions..." type="text"/>
+</div>
+<button class="bg-surface-container-high p-2 rounded-full border border-outline-variant/20">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+<!-- Leaderboard List -->
+<div class="space-y-3">
+<!-- Rank 4 -->
+<div class="glass-card rounded-xl p-4 flex items-center transition-all hover:scale-[1.01]">
+<div class="w-10 flex flex-col items-center">
+<span class="font-headline font-bold text-on-surface">4</span>
+<span class="material-symbols-outlined text-primary text-sm leading-none" style="font-variation-settings: 'FILL' 1;">arrow_drop_up</span>
+</div>
+<div class="w-12 h-12 rounded-full overflow-hidden mx-4 border border-outline-variant/30">
+<img class="w-full h-full object-cover" data-alt="Portrait of a man with friendly expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHU4AmOW21jY-BS4CawSGdncQoaAED6s8jM2PpUv9IZt3CrPrTxHVjURQR3zcjq8_X2W95RSXeBd8OYznnSW13CrGtMPVCvjX34FyJYvHNJFKbwwNmxlbfS0njPk5xO8-V7eJrbbvM8US-m20vZUhu1hwCL2eqQf4FLxjFlXtrCWRExbSL1FQ0BwYHXWjs9JBOube7X6SBjnEif54h7zJ_fUA-ZaGQYkQhrlOr8LeNGy71GACApuaGoyeNakiJ9meQVMj0lrgRSJbm"/>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-on-surface leading-tight">Obinna K.</h4>
+<span class="text-[10px] px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant border border-outline-variant/10">EDO</span>
+</div>
+<div class="text-right">
+<div class="font-headline font-bold text-on-surface">9,842</div>
+<div class="text-[10px] text-on-surface-variant uppercase tracking-widest">Points</div>
+</div>
+</div>
+<!-- Rank 5 -->
+<div class="glass-card rounded-xl p-4 flex items-center transition-all hover:scale-[1.01]">
+<div class="w-10 flex flex-col items-center">
+<span class="font-headline font-bold text-on-surface">5</span>
+<span class="material-symbols-outlined text-error text-sm leading-none" style="font-variation-settings: 'FILL' 1;">arrow_drop_down</span>
+</div>
+<div class="w-12 h-12 rounded-full overflow-hidden mx-4 border border-outline-variant/30">
+<img class="w-full h-full object-cover" data-alt="Woman with professional look" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTXbRMg6iPsCrRkWwhWljL7qOpWGpFdfloCT4GWYe0p5ayUIPqCzB2R37vL5VPtLEDxAVjanYfAcw4n4YsHO0o0hxjEE8LtYLfwKeyZeHFaG4SfXj705or6qtICO11Efnoadwkgl2WaVXEfCeXK9AqMP7x_oeoVBsWbFKHXMxrzW7r5eiPggUDh_8PL0akP6TdN4UGK_kugtc7I-PfSkDfCuXI4YvBGCagCUwpeKaiE_B3YssDNiWo1UWc6u1xZPI5b7KMdh-Uy3y2"/>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-on-surface leading-tight">Yemi A.</h4>
+<span class="text-[10px] px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant border border-outline-variant/10">OYO</span>
+</div>
+<div class="text-right">
+<div class="font-headline font-bold text-on-surface">9,210</div>
+<div class="text-[10px] text-on-surface-variant uppercase tracking-widest">Points</div>
+</div>
+</div>
+<!-- Rank 6 (Current User Context) -->
+<div class="bg-primary/10 border-l-4 border-primary rounded-xl p-4 flex items-center transition-all">
+<div class="w-10 flex flex-col items-center">
+<span class="font-headline font-bold text-primary">24</span>
+<span class="material-symbols-outlined text-primary text-sm leading-none" style="font-variation-settings: 'FILL' 1;">arrow_drop_up</span>
+</div>
+<div class="w-12 h-12 rounded-full overflow-hidden mx-4 border-2 border-primary/30">
+<img class="w-full h-full object-cover" data-alt="User avatar profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzYvZRqqwp7AHReut9jnEUr5_IB63yarPQ_aTEiAO8ycnyk9TJ7aYhS2SHQfsy_neaZdPe4OArysSZpggBPwjVNHJ_pLkf1KuSRNlRp20ykcwoGGRQr5aeYTdpmg9YT1BIAA4eTlzog_zN2ctBE13M9xJDLY2BlLdveuH7V-TlvCqUV0M7YX1L8ig57frLlQKTVIWd0Xjbe0oC7PkW2SSZ936hVi5ZMBhTFneEpzZnQ_MKLW2oLKba99vNoyvbHtY8fKJI0oCqwoT3"/>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-primary leading-tight">You (Tunde)</h4>
+<span class="text-[10px] px-2 py-0.5 rounded bg-primary-container text-primary font-bold">KWARA</span>
+</div>
+<div class="text-right">
+<div class="font-headline font-bold text-primary">4,150</div>
+<div class="text-[10px] text-on-surface-variant uppercase tracking-widest">Points</div>
+</div>
+</div>
+<!-- Rank 7 -->
+<div class="glass-card rounded-xl p-4 flex items-center opacity-80">
+<div class="w-10 flex flex-col items-center">
+<span class="font-headline font-bold text-on-surface">25</span>
+<span class="material-symbols-outlined text-on-surface-variant text-sm leading-none">remove</span>
+</div>
+<div class="w-12 h-12 rounded-full overflow-hidden mx-4 border border-outline-variant/30">
+<img class="w-full h-full object-cover" data-alt="Portrait of a young man" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIgppGF9WATOBn8YiEV2YrAbKDA46DOcMVqZDzI0igfJ29NyHIkzG7-QhkBGMn0ADc8gQRbqUgtnatB1ud6mZ_-nECioEg8OgXNTZbFZHRU8tLfIuuxdpmTUsC7d4KW47H2kzVc5cgap3TsbPPUPA96-Na98ijggZ9mRZH8rj6gdHeCDGyG0IHOSVYXZsXf9F-qM16EjmVyg6UG10_9SFe-C7F2M-fnk03YWLzjP7E0LCKcvxSmu_rba69fYw_jn3k_I46vR9nNnAz"/>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-on-surface leading-tight">Mustafa R.</h4>
+<span class="text-[10px] px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant border border-outline-variant/10">KADUNA</span>
+</div>
+<div class="text-right">
+<div class="font-headline font-bold text-on-surface">4,105</div>
+<div class="text-[10px] text-on-surface-variant uppercase tracking-widest">Points</div>
+</div>
+</div>
+</div>
+<!-- Info Card -->
+<div class="mt-12 p-6 rounded-2xl bg-surface-container-low border border-outline-variant/20 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-8xl">military_tech</span>
+</div>
+<h3 class="font-headline text-lg font-bold text-secondary mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">info</span>
+                Season of Kings
+            </h3>
+<p class="text-sm text-on-surface-variant leading-relaxed max-w-lg">
+                The current season ends in <span class="text-on-surface font-bold">4 days</span>. The Top 3 guardians will receive the exclusive <span class="italic">"Orisha Gold"</span> badge and a ₦50,000 Boutique voucher.
+            </p>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 right-0 bg-surface-container-lowest border-t border-outline-variant/20 px-4 py-2 z-50">
+<div class="max-w-md mx-auto flex justify-between items-center">
+<button class="flex flex-col items-center gap-1 p-2 text-on-surface-variant">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-medium">Dashboard</span>
+</button>
+<button class="flex flex-col items-center gap-1 p-2 text-on-surface-variant">
+<span class="material-symbols-outlined">sports_esports</span>
+<span class="text-[10px] font-medium">Arena</span>
+</button>
+<button class="flex flex-col items-center gap-1 p-2 text-on-surface-variant">
+<span class="material-symbols-outlined">explore</span>
+<span class="text-[10px] font-medium">Explorer</span>
+</button>
+<button class="flex flex-col items-center gap-1 p-2 text-on-surface-variant">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span class="text-[10px] font-medium">Boutique</span>
+</button>
+<button class="flex flex-col items-center gap-1 p-2 text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">leaderboard</span>
+<span class="text-[10px] font-bold">Leaderboard</span>
+</button>
+</div>
+</nav>
+</body></html>

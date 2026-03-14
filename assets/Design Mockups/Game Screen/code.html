@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Daily Naija Trivia - Arena</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "background": "#0f1412",
+                        "inverse-primary": "#006d43",
+                        "primary-fixed": "#78fbb6",
+                        "on-tertiary-fixed": "#221b00",
+                        "on-surface": "#dfe4e0",
+                        "on-error": "#690005",
+                        "outline-variant": "#3f4945",
+                        "surface-bright": "#353a38",
+                        "tertiary-container": "#c8a900",
+                        "secondary-fixed": "#ffe088",
+                        "tertiary-fixed": "#ffe16d",
+                        "on-tertiary-fixed-variant": "#544600",
+                        "inverse-surface": "#dfe4e0",
+                        "on-primary-fixed": "#002111",
+                        "surface-container-highest": "#313633",
+                        "secondary-fixed-dim": "#e9c349",
+                        "on-secondary-container": "#342800",
+                        "primary-container": "#004e2f",
+                        "secondary-container": "#af8d11",
+                        "on-secondary": "#3c2f00",
+                        "on-tertiary": "#3a3000",
+                        "on-error-container": "#ffdad6",
+                        "on-background": "#dfe4e0",
+                        "secondary": "#e9c349",
+                        "primary": "#59de9b",
+                        "surface-container-high": "#262b29",
+                        "on-primary-fixed-variant": "#005232",
+                        "on-primary": "#003921",
+                        "surface-container-low": "#181d1a",
+                        "tertiary-fixed-dim": "#e9c400",
+                        "error-container": "#93000a",
+                        "inverse-on-surface": "#2c322f",
+                        "surface-container-lowest": "#0a0f0d",
+                        "on-secondary-fixed-variant": "#574500",
+                        "surface-container": "#1c211e",
+                        "surface-dim": "#0f1412",
+                        "on-surface-variant": "#bfc9c4",
+                        "surface": "#0f1412",
+                        "tertiary": "#e9c400",
+                        "on-tertiary-container": "#4b3e00",
+                        "primary-fixed-dim": "#59de9b",
+                        "on-primary-container": "#3ec787",
+                        "outline": "#89938f",
+                        "error": "#ffb4ab",
+                        "surface-tint": "#59de9b",
+                        "on-secondary-fixed": "#241a00",
+                        "surface-variant": "#313633"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .ankara-overlay {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l15 30-15 30L15 30z' fill='%2359de9b' fill-opacity='0.04'/%3E%3C/svg%3E");
+        }
+        .liquid-timer {
+            background: radial-gradient(circle at 50% 120%, #e9c349 0%, transparent 80%);
+        }
+        .glass-card {
+            background: rgba(53, 58, 56, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body selection:bg-primary/30 min-h-screen flex flex-col overflow-hidden">
+<!-- TopAppBar (Shared Component Integration) -->
+<header class="h-16 flex items-center justify-between px-6 bg-surface z-50">
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface hover:bg-surface-container rounded-full">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-headline font-bold text-lg tracking-tight">Daily Naija Trivia</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-on-surface hover:bg-surface-container rounded-full relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-secondary rounded-full"></span>
+</button>
+</div>
+</header>
+<!-- Main Arena Canvas -->
+<main class="flex-1 relative flex flex-col ankara-overlay items-center justify-center p-6 sm:p-12 overflow-y-auto">
+<!-- Floating Liquid Timer -->
+<div class="mb-12 relative">
+<div class="w-32 h-32 rounded-full border-4 border-outline-variant flex items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 liquid-timer opacity-60"></div>
+<div class="z-10 flex flex-col items-center">
+<span class="text-3xl font-headline font-black text-secondary">12</span>
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Seconds</span>
+</div>
+</div>
+<!-- Glow effect -->
+<div class="absolute inset-0 bg-secondary/10 blur-3xl -z-10 rounded-full"></div>
+</div>
+<!-- Question Section -->
+<section class="max-w-3xl w-full text-center mb-12">
+<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface-container-high border border-outline-variant/20 mb-6">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-xs font-label font-semibold text-on-primary-container tracking-wider">QUESTION 08 / 15</span>
+</div>
+<h2 class="text-3xl sm:text-4xl md:text-5xl font-headline font-extrabold leading-tight text-on-surface tracking-tight">
+                Which Nigerian state is famously known as the <span class="text-primary italic">"Gateway State"</span>?
+            </h2>
+</section>
+<!-- Options Bento Grid -->
+<section class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-4xl">
+<!-- Option A -->
+<button class="group relative glass-card p-6 rounded-xl border border-outline-variant/10 text-left transition-all hover:scale-[1.02] hover:bg-surface-container-highest active:scale-[0.98]">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-4">
+<span class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container text-on-surface-variant font-bold group-hover:bg-primary group-hover:text-on-primary transition-colors">A</span>
+<span class="text-lg font-medium">Lagos State</span>
+</div>
+</div>
+</button>
+<!-- Option B (Selected State Example) -->
+<button class="group relative glass-card p-6 rounded-xl border-2 border-secondary bg-surface-container-highest shadow-[0_0_32px_rgba(233,195,73,0.15)] text-left transition-all scale-[1.02]">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-4">
+<span class="w-10 h-10 flex items-center justify-center rounded-lg bg-secondary text-on-secondary font-bold">B</span>
+<span class="text-lg font-medium text-on-surface">Ogun State</span>
+</div>
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<!-- Selection Pulse -->
+<div class="absolute inset-0 rounded-xl ring-2 ring-secondary/50 animate-ping pointer-events-none"></div>
+</button>
+<!-- Option C -->
+<button class="group relative glass-card p-6 rounded-xl border border-outline-variant/10 text-left transition-all hover:scale-[1.02] hover:bg-surface-container-highest active:scale-[0.98]">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-4">
+<span class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container text-on-surface-variant font-bold group-hover:bg-primary group-hover:text-on-primary transition-colors">C</span>
+<span class="text-lg font-medium">Oyo State</span>
+</div>
+</div>
+</button>
+<!-- Option D -->
+<button class="group relative glass-card p-6 rounded-xl border border-outline-variant/10 text-left transition-all hover:scale-[1.02] hover:bg-surface-container-highest active:scale-[0.98]">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-4">
+<span class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container text-on-surface-variant font-bold group-hover:bg-primary group-hover:text-on-primary transition-colors">D</span>
+<span class="text-lg font-medium">Kwara State</span>
+</div>
+</div>
+</button>
+</section>
+<!-- Cultural Insight Glass Card (Asymmetric) -->
+<div class="mt-12 max-w-lg w-full transform -rotate-1 self-end sm:self-center translate-x-4 sm:translate-x-0">
+<div class="glass-card p-6 rounded-xl border-t border-l border-white/5 relative overflow-hidden">
+<div class="absolute -right-4 -top-4 opacity-10 text-6xl">
+<span class="material-symbols-outlined text-primary" style="font-size: 80px;">lightbulb</span>
+</div>
+<h4 class="text-primary font-headline font-bold text-sm uppercase tracking-widest mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-xs">auto_awesome</span>
+                    Did You Know?
+                </h4>
+<p class="text-on-surface-variant text-sm leading-relaxed">
+                    Ogun State is called the Gateway State because of its strategic location as the main link between Nigeria and its neighboring country, Benin Republic.
+                </p>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Shared Component Integration) -->
+<nav class="h-20 bg-surface-container-low border-t border-outline-variant/10 flex items-center justify-around px-2 pb-2">
+<button class="flex flex-col items-center gap-1 group">
+<div class="w-12 h-8 rounded-full flex items-center justify-center transition-colors group-hover:bg-surface-container">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-surface">dashboard</span>
+</div>
+<span class="text-[10px] font-label font-medium text-on-surface-variant group-hover:text-on-surface">Dashboard</span>
+</button>
+<button class="flex flex-col items-center gap-1 group">
+<div class="w-12 h-8 rounded-full flex items-center justify-center bg-primary-container text-on-primary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">sports_esports</span>
+</div>
+<span class="text-[10px] font-label font-bold text-on-surface">Arena</span>
+</button>
+<button class="flex flex-col items-center gap-1 group">
+<div class="w-12 h-8 rounded-full flex items-center justify-center transition-colors group-hover:bg-surface-container">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-surface">explore</span>
+</div>
+<span class="text-[10px] font-label font-medium text-on-surface-variant group-hover:text-on-surface">Explorer</span>
+</button>
+<button class="flex flex-col items-center gap-1 group">
+<div class="w-12 h-8 rounded-full flex items-center justify-center transition-colors group-hover:bg-surface-container">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-surface">emoji_events</span>
+</div>
+<span class="text-[10px] font-label font-medium text-on-surface-variant group-hover:text-on-surface">Trophy Room</span>
+</button>
+</nav>
+<!-- Abuja Landmark Background (Abstracted) -->
+<div class="fixed bottom-0 left-0 w-full h-1/3 -z-20 opacity-10 pointer-events-none overflow-hidden">
+<img alt="" class="w-full h-full object-cover filter grayscale blur-lg" data-alt="Abstract dark silhouette of Nigerian architecture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDS8BsMz9BisTYeSZm53xJB53I9qvKU-YmvbuReAskQHyDLK7F_AOtLV1AyucNH9Z-tz-NBe1nhAodnin9AP6aj3h-aMbowOEXo2SFeWm4endiQO008fUT8aqyM5oraTt-8xNXX7uCKTwaiOVrMj6dnezPpzRIiH2PdIlna_Br_1j2afVyk-aFTpsw1IRkY7KMUtgVLWCdQuq0qYVraw3IB2ArO4B0vK1rtuTb35fuAdTwiDrzzgc6Ld2DRqvQ2WY4FfdOK0ztJAaJm"/>
+</div>
+</body></html>

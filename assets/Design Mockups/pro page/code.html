@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Daily Naija Trivia - Premium</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-low": "#181d1a",
+                        "primary-container": "#004e2f",
+                        "surface-variant": "#313633",
+                        "error-container": "#93000a",
+                        "surface-tint": "#59de9b",
+                        "secondary-fixed": "#ffe088",
+                        "on-background": "#dfe4e0",
+                        "on-secondary-fixed-variant": "#574500",
+                        "surface-container-high": "#262b29",
+                        "inverse-surface": "#dfe4e0",
+                        "outline": "#89938f",
+                        "tertiary": "#e9c400",
+                        "on-secondary-fixed": "#241a00",
+                        "tertiary-fixed": "#ffe16d",
+                        "secondary-container": "#af8d11",
+                        "primary": "#59de9b",
+                        "on-surface": "#dfe4e0",
+                        "on-error": "#690005",
+                        "on-tertiary-fixed": "#221b00",
+                        "on-primary-container": "#3ec787",
+                        "outline-variant": "#3f4945",
+                        "surface-container-lowest": "#0a0f0d",
+                        "primary-fixed": "#78fbb6",
+                        "tertiary-fixed-dim": "#e9c400",
+                        "on-tertiary-fixed-variant": "#544600",
+                        "on-tertiary-container": "#4b3e00",
+                        "on-tertiary": "#3a3000",
+                        "on-primary-fixed": "#002111",
+                        "on-error-container": "#ffdad6",
+                        "surface-bright": "#353a38",
+                        "primary-fixed-dim": "#59de9b",
+                        "surface-dim": "#0f1412",
+                        "secondary": "#e9c349",
+                        "tertiary-container": "#c8a900",
+                        "error": "#ffb4ab",
+                        "surface": "#0f1412",
+                        "background": "#0f1412",
+                        "surface-container-highest": "#313633",
+                        "on-secondary-container": "#342800",
+                        "on-primary": "#003921",
+                        "on-secondary": "#3c2f00",
+                        "secondary-fixed-dim": "#e9c349",
+                        "inverse-primary": "#006d43",
+                        "on-surface-variant": "#bfc9c4",
+                        "on-primary-fixed-variant": "#005232",
+                        "inverse-on-surface": "#2c322f",
+                        "surface-container": "#1c211e"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "1.5rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .ankara-overlay {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 30c0-16.569 13.431-30 30-30v60c-16.569 0-30-13.431-30-30zM0 30c0 16.569 13.431 30 30 30V0C13.431 0 0 13.431 0 30z' fill='%2359de9b' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+        .glass-panel {
+            background: rgba(53, 58, 56, 0.4);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(223, 228, 224, 0.1);
+        }
+        .gold-glow {
+            box-shadow: 0 0 40px -10px rgba(233, 195, 73, 0.3);
+        }
+        .emerald-glow {
+            box-shadow: 0 0 32px rgba(89, 222, 155, 0.15);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-container selection:text-primary min-h-screen flex flex-col items-center">
+<!-- TopAppBar -->
+<header class="w-full max-w-2xl flex items-center justify-between px-6 py-4 sticky top-0 z-50 bg-surface/80 backdrop-blur-md">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface cursor-pointer">close</span>
+<h1 class="font-headline text-lg font-bold tracking-tight text-on-surface">Daily Naija Trivia</h1>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" data-weight="fill" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+</div>
+</header>
+<main class="w-full max-w-2xl px-6 py-10 flex-grow ankara-overlay relative">
+<!-- Hero Section: Golden Sun-Disk -->
+<section class="flex flex-col items-center text-center mb-16 relative">
+<div class="absolute -top-20 left-1/2 -translate-x-1/2 w-72 h-72 bg-secondary/10 blur-[100px] rounded-full pointer-events-none"></div>
+<div class="w-40 h-40 rounded-full bg-gradient-to-tr from-secondary-container via-secondary to-secondary-fixed flex items-center justify-center p-1 gold-glow relative mb-8">
+<div class="w-full h-full rounded-full bg-surface-container-lowest flex items-center justify-center overflow-hidden border border-secondary/20">
+<div class="absolute inset-0 bg-secondary/5 animate-pulse"></div>
+<span class="material-symbols-outlined text-secondary text-7xl" style="font-variation-settings: 'FILL' 1;">stars</span>
+</div>
+<div class="absolute -inset-4 rounded-full border border-secondary/20 animate-spin-slow"></div>
+</div>
+<h2 class="font-headline text-5xl font-extrabold tracking-tighter text-on-surface mb-4">
+                Naija <span class="text-secondary">Gold</span>
+</h2>
+<p class="text-on-surface-variant text-lg max-w-xs mx-auto">The ultimate experience for Nigerian culture connoisseurs.</p>
+</section>
+<!-- Bento Grid Benefits -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
+<!-- Benefit 1 -->
+<div class="bg-surface-container-low p-8 rounded-xl flex flex-col gap-4 border-t border-white/5 overflow-hidden relative group">
+<div class="bg-primary-container w-12 h-12 rounded-lg flex items-center justify-center emerald-glow">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">lock_open</span>
+</div>
+<h3 class="font-headline text-xl font-bold">🔓 Unlock All Expert Packs</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Gain immediate access to over 500+ deep-cut trivia packs covering 36 states and beyond.</p>
+<div class="absolute bottom-0 right-0 p-2 opacity-5">
+<span class="material-symbols-outlined text-8xl">military_tech</span>
+</div>
+</div>
+<!-- Benefit 2 -->
+<div class="bg-surface-container-low p-8 rounded-xl flex flex-col gap-4 border-t border-white/5 relative">
+<div class="bg-secondary-container/20 w-12 h-12 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">block</span>
+</div>
+<h3 class="font-headline text-xl font-bold">🚫 Ad-Free</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">No interruptions. Just pure, rapid-fire knowledge discovery without the noise.</p>
+</div>
+<!-- Benefit 3 (Full Width) -->
+<div class="md:col-span-2 bg-gradient-to-br from-surface-container-high to-surface-container-low p-8 rounded-xl flex flex-col md:flex-row items-center gap-8 border-t border-secondary/10">
+<div class="flex-shrink-0 relative">
+<div class="w-24 h-24 rounded-full bg-surface-container-highest flex items-center justify-center gold-glow">
+<span class="material-symbols-outlined text-secondary text-5xl" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+</div>
+<div>
+<h3 class="font-headline text-xl font-bold mb-2">🏆 Exclusive Leaderboard Badge</h3>
+<p class="text-on-surface-variant text-sm max-w-md">Stand out in the national rankings. Show every player that you belong to the elite circle of Naija Gold scholars.</p>
+</div>
+</div>
+</section>
+<!-- Glassmorphism Fact Card -->
+<section class="glass-panel p-6 rounded-xl mb-20 border border-on-surface-variant/10">
+<div class="flex items-center gap-3 mb-3">
+<span class="material-symbols-outlined text-primary text-sm">info</span>
+<span class="text-primary font-headline text-xs font-bold uppercase tracking-widest">Did You Know?</span>
+</div>
+<p class="text-on-surface italic text-sm leading-relaxed">
+                Naija Gold members are 4x more likely to reach the "Federal Giant" status in the global leagues due to early access to trending topics.
+            </p>
+</section>
+<!-- Pricing/Action Area -->
+<div class="fixed bottom-0 left-0 right-0 flex justify-center px-6 pb-12 pt-6 bg-gradient-to-t from-background via-background/95 to-transparent z-40">
+<div class="w-full max-w-md flex flex-col items-center gap-4">
+<div class="text-center">
+<p class="text-on-surface-variant text-xs mb-1">Renews at ₦1,500/month after trial</p>
+<p class="text-secondary font-headline font-bold">Cancel anytime.</p>
+</div>
+<button class="w-full py-5 px-8 rounded-xl bg-gradient-to-r from-primary to-primary-container text-on-primary-fixed-variant font-headline font-extrabold text-lg shadow-2xl emerald-glow hover:scale-[1.02] transition-transform active:scale-95 flex items-center justify-center gap-3">
+                    Start 7-Day Free Trial
+                    <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="w-full max-w-2xl bg-surface-container-low border-t border-outline-variant/10 flex justify-around items-center h-20 px-4 sticky bottom-0 z-50">
+<div class="flex flex-col items-center gap-1 text-on-surface-variant cursor-pointer group">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">quiz</span>
+<span class="text-[10px] font-label">Trivia</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-on-surface-variant cursor-pointer group">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">emoji_events</span>
+<span class="text-[10px] font-label">Leagues</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-primary cursor-pointer">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+<span class="text-[10px] font-label">Premium</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-on-surface-variant cursor-pointer group">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">person</span>
+<span class="text-[10px] font-label">Profile</span>
+</div>
+</nav>
+<!-- FAB for quick action -->
+<button class="fixed right-6 bottom-24 w-14 h-14 bg-primary rounded-xl flex items-center justify-center shadow-lg emerald-glow z-30 text-on-primary">
+<span class="material-symbols-outlined text-3xl">play_arrow</span>
+</button>
+</body></html>

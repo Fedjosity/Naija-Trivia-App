@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Boutique - Daily Naija Trivia</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#59de9b",
+                        "tertiary-fixed": "#ffe16d",
+                        "tertiary-container": "#c8a900",
+                        "secondary-fixed": "#ffe088",
+                        "on-secondary": "#3c2f00",
+                        "outline-variant": "#3f4945",
+                        "secondary-fixed-dim": "#e9c349",
+                        "surface-variant": "#313633",
+                        "surface": "#0f1412",
+                        "secondary": "#e9c349",
+                        "primary-fixed-dim": "#59de9b",
+                        "on-primary": "#003921",
+                        "tertiary": "#e9c400",
+                        "on-tertiary-fixed": "#221b00",
+                        "on-secondary-fixed": "#241a00",
+                        "surface-container-low": "#181d1a",
+                        "surface-container": "#1c211e",
+                        "inverse-surface": "#dfe4e0",
+                        "on-error-container": "#ffdad6",
+                        "primary-container": "#004e2f",
+                        "tertiary-fixed-dim": "#e9c400",
+                        "primary-fixed": "#78fbb6",
+                        "on-secondary-fixed-variant": "#574500",
+                        "surface-container-highest": "#313633",
+                        "on-error": "#690005",
+                        "secondary-container": "#af8d11",
+                        "on-tertiary-fixed-variant": "#544600",
+                        "surface-container-high": "#262b29",
+                        "inverse-primary": "#006d43",
+                        "on-primary-container": "#3ec787",
+                        "inverse-on-surface": "#2c322f",
+                        "on-surface": "#dfe4e0",
+                        "surface-dim": "#0f1412",
+                        "background": "#0f1412",
+                        "surface-container-lowest": "#0a0f0d",
+                        "on-primary-fixed-variant": "#005232",
+                        "on-tertiary-container": "#4b3e00",
+                        "on-primary-fixed": "#002111",
+                        "outline": "#89938f",
+                        "on-surface-variant": "#bfc9c4",
+                        "surface-tint": "#59de9b",
+                        "error": "#ffb4ab",
+                        "on-tertiary": "#3a3000",
+                        "on-secondary-container": "#342800",
+                        "error-container": "#93000a",
+                        "surface-bright": "#353a38",
+                        "on-background": "#dfe4e0"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1.5rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .ankara-mask {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0 L100 50 L50 100 L0 50 Z' fill='none' stroke='%2359de9b' stroke-width='0.5' opacity='0.03'/%3E%3C/svg%3E");
+        }
+        .gold-shimmer {
+            background: linear-gradient(135deg, #af8d11 0%, #e9c349 45%, #fff6d6 50%, #e9c349 55%, #af8d11 100%);
+            background-size: 200% 200%;
+        }
+        .glass-card {
+            background: rgba(53, 58, 56, 0.4);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(223, 228, 224, 0.1);
+        }
+        .primary-glow:hover {
+            box-shadow: 0 0 32px rgba(89, 222, 155, 0.15);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface antialiased ankara-mask min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="sticky top-0 z-50 bg-surface/80 backdrop-blur-md px-6 h-16 flex items-center justify-between border-b border-outline-variant/15">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface">menu</span>
+<h1 class="font-headline text-lg font-bold tracking-tight">Daily Naija Trivia</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 bg-surface-container-high px-3 py-1.5 rounded-full border border-outline-variant/10">
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="text-sm font-bold text-on-surface">2,450</span>
+</div>
+<span class="material-symbols-outlined text-on-surface">account_circle</span>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-6 py-8">
+<!-- Premium Subscription Hero Section -->
+<section class="relative mb-12 overflow-hidden rounded-2xl p-8 gold-shimmer shadow-2xl">
+<div class="relative z-10 grid md:grid-cols-2 gap-8 items-center">
+<div class="space-y-4">
+<span class="inline-block px-3 py-1 bg-on-secondary rounded-full text-[10px] font-bold tracking-widest text-secondary uppercase">Exclusive Membership</span>
+<h2 class="font-headline text-4xl md:text-5xl font-extrabold text-on-secondary leading-tight">Naija Gold</h2>
+<p class="text-on-secondary-fixed-variant text-lg font-medium max-w-md">Unlock unlimited arena entries, double coin rewards, and the legendary Golden Eagle avatar frame.</p>
+<div class="pt-4 flex items-center gap-4">
+<button class="bg-on-secondary text-secondary-fixed px-8 py-3 rounded-xl font-bold text-sm shadow-xl flex items-center gap-2">
+                            Join the Elite — ₦2,500/mo
+                        </button>
+<p class="text-xs text-on-secondary/60 font-medium">Cancel anytime</p>
+</div>
+</div>
+<div class="hidden md:flex justify-end">
+<div class="relative w-64 h-64">
+<div class="absolute inset-0 bg-on-secondary/10 blur-3xl rounded-full"></div>
+<img alt="Royal Nigerian Crown Illustration" class="w-full h-full object-contain drop-shadow-2xl" data-alt="Abstract golden crown and jewelry elements" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAym6vrCmHi6hmFlZryxk1Puemt7SKQNRVBJvNJHIloEe0qyxTYO3ZsxKRrINmoENOUBYtxEa94JapuTVlU7U8ba0aEVcqQrOPSqJok5hN9D3HTe7Ia-UuCKiO9WPimXONdwCduO6UODOVxw1G8NM8cwdWebyO3rfWvwJ7YxA56tPasB6ku9VF75w3e8FVUbareJ2XurWk_hPSH80VEThbd_dLGyQCxCK_uMED9kbyZNO3bgZ5QIHp3k9OYJRNeoatICzOtsnqU595n"/>
+</div>
+</div>
+</div>
+<!-- Aesthetic Noise/Texture -->
+<div class="absolute inset-0 opacity-10 pointer-events-none mix-blend-overlay ankara-mask"></div>
+</section>
+<!-- Store Navigation/Tabs -->
+<nav class="flex items-center gap-8 mb-8 border-b border-outline-variant/10 pb-4 overflow-x-auto">
+<button class="font-headline font-bold text-on-surface border-b-2 border-primary pb-4 px-2 whitespace-nowrap">Premium Packs</button>
+<button class="font-headline font-medium text-on-surface-variant hover:text-on-surface transition-colors pb-4 px-2 whitespace-nowrap">Avatar Skins</button>
+<button class="font-headline font-medium text-on-surface-variant hover:text-on-surface transition-colors pb-4 px-2 whitespace-nowrap">Boosters</button>
+<button class="font-headline font-medium text-on-surface-variant hover:text-on-surface transition-colors pb-4 px-2 whitespace-nowrap">Special Events</button>
+</nav>
+<!-- Bento Grid of Premium Packs -->
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+<!-- Featured Large Pack -->
+<article class="md:col-span-2 lg:col-span-2 relative group rounded-2xl overflow-hidden bg-surface-container-low border border-outline-variant/10">
+<div class="aspect-[16/9] w-full">
+<img alt="Heritage Pack Cover" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Modern geometric pattern with green and white accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSiWqmInWyZ9-SdpipamsrCUvLl5Gj3Ew6S4vuGERH3hUR1TgXa0uV49iTmIfF-iPg8tVCJ6JsRJlWhlwYMJ1-Rj0Ac_ZIGgZD7rZ4wy2JsoQk_1Ktz7ZcAlVpdkUF3afr6nhpGB_mH4PZ5bAFhf2eQeg689L3UPp-lT1V11qoh1q1WTdXxUbGL3oLKauhqJzlte5EfCJeT5ppgY_UPuJdjwthHjWootqDGYrD2gaVLB0tKW9kArpAWqiytqz5DZAKiIHYjxUDgd-9"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-surface-container-low/60 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-8 space-y-3 w-full">
+<div class="flex items-center gap-2">
+<span class="bg-primary-container text-primary text-[10px] font-bold px-2 py-0.5 rounded uppercase">Best Value</span>
+</div>
+<h3 class="font-headline text-2xl font-bold">The Heritage Vault</h3>
+<p class="text-on-surface-variant text-sm max-w-md">1,000+ curated questions spanning from the Benin Empire to Modern Lagos. Includes 5 Mystery Crates.</p>
+<div class="pt-4 flex items-center justify-between">
+<span class="text-xl font-bold">₦4,500 <span class="text-sm text-on-surface-variant font-normal">/ $5.99</span></span>
+<button class="bg-primary hover:bg-on-primary-container text-on-primary font-bold px-6 py-2.5 rounded-xl primary-glow transition-all">Buy Pack</button>
+</div>
+</div>
+</article>
+<!-- Regular Pack 1 -->
+<article class="glass-card rounded-2xl p-6 flex flex-col group border border-outline-variant/5">
+<div class="h-40 w-full mb-6 rounded-xl overflow-hidden bg-surface-container-highest">
+<img alt="Nollywood Pack Cover" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="Cinema film reel and star icons" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASbGTZNeJvMzbGnaF2FNRw5VcccsRcojTBVgbq-dhQVAe-KwaI38yMEvFYGpeYGAOxQKKR9JSjPwY8qIdx63vVkZy9o7C9wPWx2l2VKMwOIss-RAEs5a2lkINGymDSYgEwRVA1gYA8BiUUL8NDipDsJQFFlkjSW6D0jnW5T7vZ3pEP7EiaApNxVLTx3vxEkA0jgMJCuF4hX94lq0nkdVj70HasqO81wF4gggbcQ07EYO3Fn1BUevJbmYix1psMtWm5w-V5RWESrVpb"/>
+</div>
+<h3 class="font-headline text-lg font-bold mb-2">Nollywood Giants</h3>
+<p class="text-on-surface-variant text-xs mb-6 leading-relaxed flex-grow">Test your movie knowledge from the early home video era to the global blockbusters of today.</p>
+<button class="w-full bg-surface-container-highest hover:bg-surface-bright text-on-surface border border-outline-variant/20 font-bold py-3 rounded-xl transition-all flex items-center justify-center gap-2">
+<span class="text-secondary font-bold">₦1,200</span>
+<span class="text-outline text-xs font-medium">| $1.50</span>
+</button>
+</article>
+<!-- Regular Pack 2 -->
+<article class="glass-card rounded-2xl p-6 flex flex-col group border border-outline-variant/5">
+<div class="h-40 w-full mb-6 rounded-xl overflow-hidden bg-surface-container-highest">
+<img alt="Super Eagles Pack Cover" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="Football pitch with vibrant green light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNmFVEB51FW-5b09TwYr-6ZBh2XKdqLn6JoDk-rGf0DP40cWCWyFsx2nMLdtem5EmFNu8GMseFq_ld_weoj4vsr8n8MPZjOeLGyrzD4Gt_vJCxfzZTFh6V19HCaSNaolV8fjrxiPPocTFWASzKbUnyP20pCkIExmGyIlCv6spuZSKp1odIB-Dq4DxQkS2v7VZ3YhCF5DLpSPGabFzjU7StZCv1ihV_n8Tkh4ix5XgDeZE9mpnLz1RtBtrXhlDskTqZ153wgMiHGTdg"/>
+</div>
+<h3 class="font-headline text-lg font-bold mb-2">Sports Legends</h3>
+<p class="text-on-surface-variant text-xs mb-6 leading-relaxed flex-grow">Relive the 1994 glory, the Olympic golds, and current Premier League icons. For the ultimate fans.</p>
+<button class="w-full bg-surface-container-highest hover:bg-surface-bright text-on-surface border border-outline-variant/20 font-bold py-3 rounded-xl transition-all flex items-center justify-center gap-2">
+<span class="text-secondary font-bold">₦1,200</span>
+<span class="text-outline text-xs font-medium">| $1.50</span>
+</button>
+</article>
+<!-- Regular Pack 3 -->
+<article class="glass-card rounded-2xl p-6 flex flex-col group border border-outline-variant/5">
+<div class="h-40 w-full mb-6 rounded-xl overflow-hidden bg-surface-container-highest">
+<img alt="States &amp; Capitals Pack" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="Map outline with colorful markers" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBb9pneuCQjW4yW31H-sBbgEFcT3K5xxFOSCC-M8doWGQfLahHhUVKMypcHhISi2RC4YA8I-8Ci1kkqmvWci960KqqgGphbjowVXllVdQC5uOIbfMIkqgAD66zYH5NsdzP6829rSQik8DGCD3iw4m6UhJXA8z6dXGMDCuNbxiVPIReiDXLJSlbkoqAb7-CIXoJqzQZaMuWQ5FWP_O9ZYea0l1Yb0YkLovBsAfCuyH-824XUkcIQ_JkZu72bklWt5s2npE2Dc036nzTr"/>
+</div>
+<h3 class="font-headline text-lg font-bold mb-2">36 States Tour</h3>
+<p class="text-on-surface-variant text-xs mb-6 leading-relaxed flex-grow">Geography, landmarks, and local delicacies from every corner of the Federation.</p>
+<button class="w-full bg-surface-container-highest hover:bg-surface-bright text-on-surface border border-outline-variant/20 font-bold py-3 rounded-xl transition-all flex items-center justify-center gap-2">
+<span class="text-secondary font-bold">₦800</span>
+<span class="text-outline text-xs font-medium">| $0.99</span>
+</button>
+</article>
+<!-- Regular Pack 4 -->
+<article class="glass-card rounded-2xl p-6 flex flex-col group border border-outline-variant/5">
+<div class="h-40 w-full mb-6 rounded-xl overflow-hidden bg-surface-container-highest">
+<img alt="Afrobeats Pack" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="Music studio equipment with neon glows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCC2f7snLkOaRAjDqjz0XodnIs9ObztWdk67C9mFR5MJ3INg9RPkpWflPV4F3zBMEvMpkHsiZAc2sfC4Uds5XhwmfsuZ2BCYyybOdepbnBsbuIx5fy3GcKVEz485EVL9por7GBIi5i_WgqjrwGZonbAXMvrHe2NQ-QQLYLfJlGaxVJqj5F-1NCmt_SLDcTtOYBV6ayiJ1MeFMQaJJsX4LDTd7rVM-l--WgWrB90EH2z45cbIYfjA68yR01Kv48O5qNUHdZEMSilflVy"/>
+</div>
+<h3 class="font-headline text-lg font-bold mb-2">Afrobeats Pulse</h3>
+<p class="text-on-surface-variant text-xs mb-6 leading-relaxed flex-grow">From Fela's shrine to Burna's arenas. The rhythm of the nation in 500 questions.</p>
+<button class="w-full bg-surface-container-highest hover:bg-surface-bright text-on-surface border border-outline-variant/20 font-bold py-3 rounded-xl transition-all flex items-center justify-center gap-2">
+<span class="text-secondary font-bold">₦1,500</span>
+<span class="text-outline text-xs font-medium">| $1.99</span>
+</button>
+</article>
+</div>
+<!-- Special Offers / Fact of the Day -->
+<aside class="mt-16 grid lg:grid-cols-3 gap-6">
+<div class="lg:col-span-2 bg-surface-container-low p-8 rounded-2xl border border-outline-variant/10 flex flex-col md:flex-row items-center gap-8">
+<div class="p-4 bg-primary/10 rounded-full">
+<span class="material-symbols-outlined text-primary text-5xl">inventory_2</span>
+</div>
+<div>
+<h4 class="font-headline text-xl font-bold mb-2">Starter Bundle Sale</h4>
+<p class="text-on-surface-variant text-sm mb-4">New to the Arena? Get 3 packs (Heritage, Nollywood, Sports) for the price of one. Limited time only!</p>
+<div class="flex items-center gap-6">
+<button class="text-primary font-bold text-sm underline underline-offset-4">Claim Bundle</button>
+<span class="text-xs text-outline font-medium tracking-widest">ENDS IN 14:02:45</span>
+</div>
+</div>
+</div>
+<div class="glass-card p-8 rounded-2xl border border-primary/20 flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-secondary mb-4" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+<h4 class="font-headline text-lg font-bold mb-2">Daily Gold Nugget</h4>
+<p class="text-on-surface-variant text-xs italic">"Did you know Nigeria has over 500 ethnic groups and languages?"</p>
+<button class="mt-6 text-[10px] font-bold tracking-widest text-on-surface-variant uppercase hover:text-secondary transition-colors">Share Fact</button>
+</div>
+</aside>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 right-0 z-50 bg-surface-container-low/95 backdrop-blur-lg border-t border-outline-variant/15 px-4 h-20">
+<div class="max-w-xl mx-auto h-full flex items-center justify-between">
+<div class="flex flex-col items-center justify-center gap-1 w-1/5 text-on-surface-variant">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-medium">Dashboard</span>
+</div>
+<div class="flex flex-col items-center justify-center gap-1 w-1/5 text-on-surface-variant">
+<span class="material-symbols-outlined">sports_esports</span>
+<span class="text-[10px] font-medium">Arena</span>
+</div>
+<div class="flex flex-col items-center justify-center gap-1 w-1/5 text-on-surface-variant">
+<span class="material-symbols-outlined">explore</span>
+<span class="text-[10px] font-medium">Explorer</span>
+</div>
+<div class="flex flex-col items-center justify-center gap-1 w-1/5 text-primary">
+<div class="relative">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shopping_bag</span>
+<div class="absolute -top-1 -right-1 w-2 h-2 bg-secondary rounded-full shadow-lg"></div>
+</div>
+<span class="text-[10px] font-bold">Boutique</span>
+</div>
+<div class="flex flex-col items-center justify-center gap-1 w-1/5 text-on-surface-variant">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="text-[10px] font-medium">Leaderboard</span>
+</div>
+</div>
+</nav>
+</body></html>

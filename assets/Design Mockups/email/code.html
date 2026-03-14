@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sign Up - Daily Naija Trivia</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "tertiary": "#e9c400",
+                "on-background": "#dfe4e0",
+                "secondary-fixed": "#ffe088",
+                "primary-fixed-dim": "#59de9b",
+                "surface-variant": "#313633",
+                "surface-bright": "#353a38",
+                "on-secondary-container": "#342800",
+                "on-error-container": "#ffdad6",
+                "surface": "#0f1412",
+                "inverse-on-surface": "#2c322f",
+                "on-secondary-fixed-variant": "#574500",
+                "surface-container-high": "#262b29",
+                "primary": "#59de9b",
+                "on-tertiary-container": "#4b3e00",
+                "error-container": "#93000a",
+                "surface-dim": "#0f1412",
+                "inverse-primary": "#006d43",
+                "surface-container-highest": "#313633",
+                "on-primary-container": "#3ec787",
+                "on-surface-variant": "#bfc9c4",
+                "tertiary-fixed-dim": "#e9c400",
+                "on-primary": "#003921",
+                "surface-container-lowest": "#0a0f0d",
+                "background": "#0f1412",
+                "inverse-surface": "#dfe4e0",
+                "surface-container": "#1c211e",
+                "outline-variant": "#3f4945",
+                "surface-container-low": "#181d1a",
+                "on-secondary-fixed": "#241a00",
+                "secondary": "#e9c349",
+                "tertiary-fixed": "#ffe16d",
+                "primary-fixed": "#78fbb6",
+                "primary-container": "#004e2f",
+                "tertiary-container": "#c8a900",
+                "on-tertiary": "#3a3000",
+                "error": "#ffb4ab",
+                "surface-tint": "#59de9b",
+                "on-primary-fixed-variant": "#005232",
+                "on-primary-fixed": "#002111",
+                "on-tertiary-fixed": "#221b00",
+                "outline": "#89938f",
+                "on-tertiary-fixed-variant": "#544600",
+                "on-secondary": "#3c2f00",
+                "on-error": "#690005",
+                "secondary-container": "#af8d11",
+                "secondary-fixed-dim": "#e9c349",
+                "on-surface": "#dfe4e0"
+              },
+              fontFamily: {
+                "headline": ["Plus Jakarta Sans"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0f1412;
+            color: #dfe4e0;
+            font-family: 'Inter', sans-serif;
+        }
+        .ankara-overlay {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 50L0 0M50 50L100 0M50 50L100 100M50 50L0 100' stroke='%2359de9b' stroke-width='0.5' fill='none' opacity='0.04'/%3E%3C/svg%3E");
+        }
+        .glass-panel {
+            background: rgba(53, 58, 56, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(233, 195, 73, 0.1);
+        }
+        .input-glow:focus-within {
+            box-shadow: 0 0 15px rgba(233, 195, 73, 0.2);
+            border-color: rgba(233, 195, 73, 0.5);
+        }
+        .primary-glow {
+            box-shadow: 0 4px 24px -6px rgba(89, 222, 155, 0.4);
+        }
+        .gold-text-gradient {
+            background: linear-gradient(135deg, #e9c349 0%, #af8d11 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen flex flex-col relative overflow-hidden bg-surface selection:bg-primary selection:text-on-primary">
+<div class="fixed inset-0 ankara-overlay pointer-events-none"></div>
+<div class="fixed top-[-10%] right-[-10%] w-[50%] h-[50%] bg-secondary/10 blur-[120px] rounded-full pointer-events-none"></div>
+<div class="fixed bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/5 blur-[100px] rounded-full pointer-events-none"></div>
+<header class="w-full flex justify-center py-12 z-10">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 bg-secondary rounded-xl flex items-center justify-center shadow-lg shadow-secondary/20">
+<span class="material-symbols-outlined text-on-secondary text-3xl" style="font-variation-settings: 'FILL' 1;">
+                    workspace_premium
+                </span>
+</div>
+<h1 class="font-headline font-extrabold text-2xl tracking-tight text-on-surface">
+                Daily Naija Trivia
+            </h1>
+</div>
+</header>
+<main class="flex-grow flex items-center justify-center px-6 pb-20 z-10">
+<div class="w-full max-w-md">
+<div class="glass-panel p-8 md:p-10 rounded-[2rem] shadow-2xl relative">
+<div class="absolute -top-6 -right-6 w-20 h-20 bg-primary/10 blur-xl rounded-full"></div>
+<div class="mb-10 text-center">
+<h2 class="font-headline text-3xl font-bold mb-3 text-on-surface">Join the Archive</h2>
+<p class="text-on-surface-variant font-body leading-relaxed">
+                        Secure your place in the royal arena. Prestige awaits.
+                    </p>
+</div>
+<form class="space-y-6">
+<div class="space-y-2">
+<label class="block text-xs font-semibold uppercase tracking-widest text-secondary/80 ml-1">Full Name</label>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-on-surface-variant group-focus-within:text-secondary transition-colors">person</span>
+</div>
+<input class="w-full bg-surface-container-highest border-transparent rounded-xl py-4 pl-12 pr-4 text-on-surface placeholder:text-on-surface-variant/40 focus:ring-1 focus:ring-secondary/50 focus:border-secondary/50 transition-all outline-none" placeholder="Chidi Adebayo" type="text"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="block text-xs font-semibold uppercase tracking-widest text-secondary/80 ml-1">Email Address</label>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-on-surface-variant group-focus-within:text-secondary transition-colors">mail</span>
+</div>
+<input class="w-full bg-surface-container-highest border-transparent rounded-xl py-4 pl-12 pr-4 text-on-surface placeholder:text-on-surface-variant/40 focus:ring-1 focus:ring-secondary/50 focus:border-secondary/50 transition-all outline-none" placeholder="chidi@archive.ng" type="email"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="block text-xs font-semibold uppercase tracking-widest text-secondary/80 ml-1">Password</label>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-on-surface-variant group-focus-within:text-secondary transition-colors">lock</span>
+</div>
+<input class="w-full bg-surface-container-highest border-transparent rounded-xl py-4 pl-12 pr-12 text-on-surface placeholder:text-on-surface-variant/40 focus:ring-1 focus:ring-secondary/50 focus:border-secondary/50 transition-all outline-none" placeholder="••••••••••••" type="password"/>
+<div class="absolute inset-y-0 right-0 pr-4 flex items-center">
+<button class="text-on-surface-variant hover:text-on-surface" type="button">
+<span class="material-symbols-outlined text-xl">visibility</span>
+</button>
+</div>
+</div>
+</div>
+<div class="pt-4">
+<button class="w-full bg-gradient-to-br from-secondary to-secondary-container text-on-secondary font-headline font-bold py-5 rounded-xl flex items-center justify-center gap-2 primary-glow active:scale-[0.98] transition-all" type="submit">
+                            Create Account
+                            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</form>
+<div class="mt-10 flex flex-col items-center gap-4">
+<div class="flex items-center gap-2 text-on-surface-variant text-sm">
+<span>Already a member?</span>
+<a class="text-secondary font-bold hover:underline underline-offset-4" href="#">Back to Login</a>
+</div>
+<div class="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/30 mt-4">
+<span class="material-symbols-outlined text-xs">verified_user</span>
+                        Secure Encrypted Authentication
+                    </div>
+</div>
+</div>
+<footer class="mt-12 flex justify-center gap-8">
+<div class="flex items-center gap-2 text-on-surface-variant/40 text-xs">
+<span class="material-symbols-outlined text-sm">history_edu</span>
+                    Heritage Verified
+                </div>
+<div class="flex items-center gap-2 text-on-surface-variant/40 text-xs">
+<span class="material-symbols-outlined text-sm">policy</span>
+                    Privacy Protocol
+                </div>
+</footer>
+</div>
+</main>
+<div class="fixed bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-secondary/20 to-transparent"></div>
+</body></html>

@@ -13,6 +13,7 @@
     "@antigravity/utils": "workspace:^",
     "expo": "~54.0.33",
     "expo-constants": "^18.0.13",
+    "expo-dev-client": "~6.0.20",
     "expo-file-system": "^19.0.21",
     "expo-linear-gradient": "~15.0.8",
     "expo-linking": "^8.0.11",

@@ -1,19 +1,17 @@
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { View } from 'react-native';
 import "../global.css";
 
-export default function Layout() {
+export default function RootLayout() {
   return (
-    <View className="flex-1 bg-brand-background">
+    <>
       <StatusBar style="light" />
-      <Stack
-        screenOptions={{
-          headerShown: false,
-          contentStyle: { backgroundColor: 'transparent' },
-          animation: 'fade',
-        }}
-      />
-    </View>
+      <Stack screenOptions={{ headerShown: false, animation: 'fade' }}>
+        <Stack.Screen name="(auth)" />
+        <Stack.Screen name="(tabs)" />
+        <Stack.Screen name="gold" options={{ presentation: 'modal' }} />
+        <Stack.Screen name="checkout" options={{ presentation: 'modal' }} />
+      </Stack>
+    </>
   );
 }

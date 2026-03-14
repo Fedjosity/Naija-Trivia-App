@@ -5,18 +5,23 @@ module.exports = {
     extend: {
       colors: {
         brand: {
-          primary: '#013220', // Midnight Emerald
-          secondary: '#D4AF37', // Polished Gold
-          accent: '#004D40', // Deep Teal
-          background: '#050808', // Deepest Slate
-          surface: '#0D1413', // Glassmorphic surface
-          text: '#F9F7F2', // Warm Ivory text
-          muted: '#8A9A98', // Muted slate green
+          // Core palette
+          bg:        '#0D1410', // App background (near-black green)
+          surface:   '#1A2118', // Cards & panels
+          elevated:  '#233022', // Elevated surfaces
+          // Accents
+          green:     '#2D6A4F', // Emerald green (CTAs, active tabs)
+          'green-light': '#3A7D5E',
+          gold:      '#D4AF37', // Polished gold (headings, prices, accents)
+          'gold-light': '#F5C518',
+          // Text
+          text:      '#FFFFFF', // Primary text
+          muted:     '#8A9A98', // Secondary / placeholder text
+          // Semantic
+          correct:   '#22C55E', // Correct answer green
+          wrong:     '#EF4444', // Wrong answer red
         }
       },
-      fontFamily: {
-        serif: ['serif'], // Use system serif for elegant titles
-      }
     },
   },
   plugins: [],

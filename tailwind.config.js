@@ -6,23 +6,23 @@ module.exports = {
       colors: {
         brand: {
           // ── Stitch Midnight Emerald & Polished Gold ──────────────────────────
-          bg:              '#0f1412', // surface (darkest base)
-          surface:         '#1c211e', // surface_container
-          elevated:        '#262b29', // surface_container_high
-          highest:         '#313633', // surface_container_highest
+          bg:              '#0f1412',
+          surface:         '#1c211e',
+          elevated:        '#262b29',
+          highest:         '#313633',
           // Accents
-          green:           '#59de9b', // primary
-          'green-dim':     '#004e2f', // primary_container
-          gold:            '#e9c349', // secondary
-          'gold-dim':      '#af8d11', // secondary_container
+          green:           '#59de9b',
+          'green-dim':     '#004e2f',
+          gold:            '#e9c349',
+          'gold-dim':      '#af8d11',
           // Text
-          text:            '#dfe4e0', // on_surface
-          muted:           '#bfc9c4', // on_surface_variant
-          faint:           '#89938f', // outline
+          text:            '#dfe4e0',
+          muted:           '#bfc9c4',
+          faint:           '#89938f',
           // Semantic
-          correct:         '#59de9b', // primary
-          wrong:           '#93000a', // error_container
-          outline:         '#3f4945', // outline_variant
+          correct:         '#59de9b',
+          wrong:           '#93000a',
+          outline:         '#3f4945',
         }
       },
     },

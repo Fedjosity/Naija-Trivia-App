@@ -5,13 +5,13 @@ import { getStorage } from "firebase/storage";
 import { getRemoteConfig } from "firebase/remote-config";
 
 const firebaseConfig = {
-  projectId: "naija-trivia",
-  appId: "1:675073319648:web:15d698b9fe41e039c8e685",
-  storageBucket: "naija-trivia.firebasestorage.app",
-  apiKey: "AIzaSyD-YOjX9eJSZpcMqNMi2m05-mM8Dy9d_GE",
-  authDomain: "naija-trivia.firebaseapp.com",
-  messagingSenderId: "675073319648",
-  measurementId: "G-VHB899GEJX"
+  projectId: process.env.EXPO_PUBLIC_FIREBASE_PROJECT_ID,
+  appId: process.env.EXPO_PUBLIC_FIREBASE_APP_ID,
+  storageBucket: process.env.EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  apiKey: process.env.EXPO_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  messagingSenderId: process.env.EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  measurementId: process.env.EXPO_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
 const app = initializeApp(firebaseConfig);

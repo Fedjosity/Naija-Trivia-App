@@ -1,10 +1,10 @@
-import * as MMKVLib from 'react-native-mmkv';
+const { MMKV } = require('react-native-mmkv');
 
 /**
  * Encrypted and high-performance local storage for Naija Trivia.
  * Used for wallet, streaks, and offline pack metadata.
  */
-export const storage = new MMKVLib.MMKV({
+export const storage = new MMKV({
   id: 'naija-trivia-storage',
   // In production, we would use an encryption key from the Keystore/Keychain
   // encryptionKey: 'some-secure-key' 

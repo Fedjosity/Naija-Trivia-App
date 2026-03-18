@@ -6,6 +6,7 @@ import { useEffect, useState, useRef } from 'react';
 import { Flame, Trophy, Coins, PlayCircle, ChevronRight, CheckCircle2, TrendingUp } from 'lucide-react-native';
 import DrawerMenu, { type DrawerHandle } from '../../components/DrawerMenu';
 import AppHeader from '../../components/AppHeader';
+import { useNaijaStore } from '../../store/useNaijaStore';
 
 const PACKS = [
   { id: '1', title: 'Flavors of Naija', desc: 'How well do you know our spices, recipes, and regional delicacies?', badge: 'POPULAR', icon: '🍲', color: '#2a1a0a' },
@@ -34,6 +35,7 @@ export default function DashboardScreen() {
   const router = useRouter();
   const drawer = useRef<DrawerHandle>(null);
   const { h, m, s } = useCountdown(14 * 3600 + 32 * 60 + 8);
+  const { stats, wallet } = useNaijaStore();
 
   return (
     <View style={{ flex: 1, backgroundColor: '#0f1412' }}>
@@ -75,13 +77,13 @@ export default function DashboardScreen() {
           {/* Stats */}
           <View style={{ flexDirection: 'row', paddingHorizontal: 20, marginTop: 20, gap: 12 }}>
             {[
-              { Icon: Flame, label: 'Current Streak', value: '12 Days', sub: 'BEST: 21', iconColor: '#e9c349' },
-              { Icon: Trophy, label: 'Global Rank', value: '#482', sub: 'TOP 2%', iconColor: '#59de9b' },
+              { Icon: Flame, label: 'Current Streak', value: `${stats.highestStreak} Days`, sub: `BEST: ${stats.highestStreak}`, iconColor: '#e9c349' },
+              { Icon: Trophy, label: 'Global Rank', value: '#---', sub: 'SYNCING...', iconColor: '#59de9b' },
             ].map(st => (
               <View key={st.label} style={{ flex: 1, backgroundColor: '#1c211e', borderRadius: 20, padding: 16 }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 10 }}>
                   <st.Icon size={22} color={st.iconColor} />
-                  <View style={{ backgroundColor: '#262b29', paddingHorizontal: 8, paddingVertical: 3, borderRadius: 999 }}>
+                  <View style={{ backgroundColor: '#262b29', paddingHorizontal: 8, paddingVertical: 4, borderRadius: 999 }}>
                     <Text style={{ color: '#89938f', fontSize: 9, fontWeight: '700' }}>{st.sub}</Text>
                   </View>
                 </View>
@@ -95,10 +97,10 @@ export default function DashboardScreen() {
               <Coins size={22} color="#e9c349" />
               <View>
                 <Text style={{ color: '#89938f', fontSize: 10, textTransform: 'uppercase', letterSpacing: 1.5 }}>Trivia Tokens</Text>
-                <Text style={{ color: '#dfe4e0', fontWeight: '900', fontSize: 22 }}>2,450</Text>
+                <Text style={{ color: '#dfe4e0', fontWeight: '900', fontSize: 22 }}>{wallet.naijaCoins.toLocaleString()}</Text>
               </View>
             </View>
-            <TouchableOpacity style={{ backgroundColor: '#262b29', paddingHorizontal: 16, paddingVertical: 8, borderRadius: 12 }}>
+            <TouchableOpacity onPress={() => router.push('/gold')} style={{ backgroundColor: '#262b29', paddingHorizontal: 16, paddingVertical: 8, borderRadius: 12 }}>
               <Text style={{ color: '#59de9b', fontWeight: '700', fontSize: 12 }}>Top Up +</Text>
             </TouchableOpacity>
           </View>

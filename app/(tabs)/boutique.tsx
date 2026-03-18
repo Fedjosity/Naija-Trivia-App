@@ -4,6 +4,7 @@ import { useRouter } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useState, useRef } from 'react';
 import { Star, Coins, Package, Zap, X as XIcon, SkipForward, Lightbulb, ShoppingBag } from 'lucide-react-native';
+import { useNaijaStore } from '../../store/useNaijaStore';
 import DrawerMenu, { type DrawerHandle } from '../../components/DrawerMenu';
 import AppHeader from '../../components/AppHeader';
 
@@ -71,6 +72,7 @@ export default function BoutiqueScreen() {
   const router = useRouter();
   const drawer = useRef<DrawerHandle>(null);
   const [activeTab, setActiveTab] = useState(0);
+  const { wallet } = useNaijaStore();
 
   return (
     <View style={{ flex: 1, backgroundColor: '#0f1412' }}>
@@ -82,7 +84,7 @@ export default function BoutiqueScreen() {
           rightSlot={
             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6, backgroundColor: '#1c211e', paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12 }}>
               <Coins size={14} color="#e9c349" />
-              <Text style={{ color: '#e9c349', fontSize: 12, fontWeight: '700' }}>2,450</Text>
+              <Text style={{ color: '#e9c349', fontSize: 12, fontWeight: '700' }}>{wallet.naijaCoins.toLocaleString()}</Text>
             </View>
           }
         />

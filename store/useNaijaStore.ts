@@ -31,8 +31,15 @@ export function useNaijaStore() {
     });
   }, []);
 
+  const refreshSubscriptionStatus = useCallback(async () => {
+    const { RevenueCatService } = await import('../services/revenueCat');
+    const isGold = await RevenueCatService.isGoldMember();
+    updateWallet({ isNaijaGold: isGold });
+  }, [updateWallet]);
+
   // Listen for storage changes if necessary (MMKV supports listeners)
   useEffect(() => {
+    refreshSubscriptionStatus();
     const listener = storage.addOnValueChangedListener((key: string) => {
       if (key === StorageKeys.USER_STATS) {
         const raw = storage.getString(key);

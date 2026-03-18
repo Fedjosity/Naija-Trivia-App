@@ -7,6 +7,10 @@ import "../global.css";
 export default function RootLayout() {
   useEffect(() => {
     RemoteConfigService.initialize();
+    // In production, we would pass the real User ID here
+    import('../services/revenueCat').then(({ RevenueCatService }) => {
+      RevenueCatService.initialize();
+    });
   }, []);
 
   return (

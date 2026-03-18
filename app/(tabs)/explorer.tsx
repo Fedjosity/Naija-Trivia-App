@@ -93,7 +93,7 @@ export default function ExplorerScreen() {
               <View key={pack.id} style={{ backgroundColor: '#1c211e', borderRadius: 20, overflow: 'hidden', marginBottom: 14 }}>
                 <View style={{ padding: 18 }}>
                   <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-                    <Text style={{ color: '#dfe4e0', fontWeight: '800', fontSize: 16 }}>{pack.title}</Text>
+                    <Text style={{ color: '#dfe4e0', fontWeight: '800', fontSize: 16 }}>{pack.title || `Pack ${pack.id}`}</Text>
                     <View style={{ backgroundColor: '#262b29', paddingHorizontal: 8, paddingVertical: 4, borderRadius: 8 }}>
                       <Text style={{ color: '#e9c349', fontSize: 10, fontWeight: '700' }}>V{pack.version}</Text>
                     </View>

@@ -1,19 +1,34 @@
-import { View, Text, TouchableOpacity, ScrollView, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, Animated, Easing, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import * as FileSystem from 'expo-file-system';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useGameEngine } from '../../hooks/useGameEngine';
+import { PackSchema, type Pack } from '@antigravity/content-schema';
+
+// Reuse components or styles from arena if needed, but here we build the dynamic version
+const LETTERS = ['A', 'B', 'C', 'D'];
 
 export default function GameScreen() {
   const { id } = useLocalSearchParams();
   const router = useRouter();
-  
-  const [questions, setQuestions] = useState<any[]>([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [selected, setSelected] = useState<number | null>(null);
-  const [answered, setAnswered] = useState(false);
+  const [pack, setPack] = useState<Pack | null>(null);
   const [loading, setLoading] = useState(true);
+
+  const {
+    currentQuestion,
+    qIdx,
+    selectedIdx,
+    gameState,
+    score,
+    timeLeft,
+    isLastQuestion,
+    startGame,
+    handleAnswer,
+    nextQuestion,
+    totalQuestions
+  } = useGameEngine(pack);
 
   useEffect(() => {
     loadPack();
@@ -21,166 +36,144 @@ export default function GameScreen() {
 
   const loadPack = async () => {
     try {
-        if (!(FileSystem as any).documentDirectory) throw new Error("No FS");
-        const fileUri = `${(FileSystem as any).documentDirectory}${id}.json`;
-        const fileContent = await FileSystem.readAsStringAsync(fileUri);
-        const pack = JSON.parse(fileContent);
-        if (pack.questions && pack.questions.length > 0) {
-            setQuestions(pack.questions);
-        } else {
-            Alert.alert("Error", "This pack is empty.");
-            router.back();
-        }
+      const fileUri = `${FileSystem.documentDirectory}packs/${id}.json`;
+      const fileContent = await FileSystem.readAsStringAsync(fileUri);
+      const data = JSON.parse(fileContent);
+      const validation = PackSchema.safeParse(data);
+      if (validation.success) {
+        setPack(validation.data);
+      } else {
+        throw new Error("Invalid Pack format");
+      }
     } catch (e) {
-        Alert.alert("Error", "Could not load pack. Make sure you downloaded it.");
-        router.back();
+      console.error(e);
+      Alert.alert("Error", "Could not load pack. Returning to dashboard.");
+      router.back();
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
   };
 
-  const handleAnswer = (index: number) => {
-    if (answered) return;
-    setSelected(index);
-    setAnswered(true);
-  };
-  
-  const nextQuestion = () => {
-      if (currentIndex < questions.length - 1) {
-          setCurrentIndex(curr => curr + 1);
-          setSelected(null);
-          setAnswered(false);
-      } else {
-          Alert.alert("Pack Complete", "You finished this pack!", [
-              { text: "Awesome", onPress: () => router.back() }
-          ]);
-      }
-  };
+  useEffect(() => {
+    if (pack && gameState === 'idle') {
+      startGame();
+    }
+  }, [pack, gameState, startGame]);
 
-  if (loading) return (
-    <View className="flex-1 bg-brand-background justify-center items-center">
-      <Text className="text-brand-secondary font-serif uppercase tracking-[5px]">Loading...</Text>
-    </View>
-  );
+  if (loading || !pack || !currentQuestion) {
+    return (
+      <View style={{ flex: 1, backgroundColor: '#0f1412', alignItems: 'center', justifyContent: 'center' }}>
+        <Text style={{ color: '#e9c349', fontWeight: '800' }}>INITIALIZING ARENA...</Text>
+      </View>
+    );
+  }
 
-  const currentQuestion = questions[currentIndex];
-  const isCorrect = selected === currentQuestion.correctAnswerIndex;
+  if (gameState === 'finished') {
+    return (
+      <View style={{ flex: 1, backgroundColor: '#0f1412', alignItems: 'center', justifyContent: 'center', paddingHorizontal: 32 }}>
+        <Text style={{ fontSize: 64, marginBottom: 16 }}>🏆</Text>
+        <Text style={{ color: '#e9c349', fontSize: 32, fontWeight: '900', textAlign: 'center', marginBottom: 8 }}>Pack Complete!</Text>
+        <Text style={{ color: '#dfe4e0', fontSize: 20, fontWeight: '700', textAlign: 'center', marginBottom: 40 }}>Score: {score}</Text>
+        <TouchableOpacity onPress={() => router.replace('/(tabs)')} style={{ backgroundColor: '#59de9b', paddingVertical: 16, paddingHorizontal: 48, borderRadius: 999 }}>
+          <Text style={{ color: '#0f1412', fontWeight: '900', fontSize: 16 }}>Return Home</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
 
   return (
-    <View className="flex-1 bg-brand-background">
-      {/* Decorative Glows */}
-      <View className="absolute top-0 right-0 w-64 h-64 bg-brand-primary/10 rounded-full blur-3xl" />
-      <View className="absolute bottom-20 left-[-50] w-80 h-80 bg-brand-secondary/5 rounded-full blur-3xl" />
+    <View style={{ flex: 1, backgroundColor: '#0f1412' }}>
+      <SafeAreaView edges={['top']} style={{ flex: 1 }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 20, paddingVertical: 12 }}>
+          <TouchableOpacity onPress={() => router.back()} style={{ backgroundColor: '#1c211e', width: 36, height: 36, borderRadius: 10, alignItems: 'center', justifyContent: 'center' }}>
+            <Text style={{ color: '#dfe4e0', fontSize: 18 }}>←</Text>
+          </TouchableOpacity>
+          <Text style={{ color: '#dfe4e0', fontWeight: '800', fontSize: 16 }}>{pack.id}</Text>
+          <View style={{ backgroundColor: '#1c211e', paddingHorizontal: 12, paddingVertical: 6, borderRadius: 20 }}>
+            <Text style={{ color: '#e9c349', fontWeight: '700', fontSize: 12 }}>{score} XP</Text>
+          </View>
+        </View>
 
-      <SafeAreaView className="flex-1">
-        <ScrollView contentContainerClassName="p-8 pb-16">
-
-           {/* Elegant Header */}
-           <View className="flex-row justify-between items-center mb-12">
-              <TouchableOpacity onPress={() => router.back()} className="flex-row items-center">
-                <Text className="text-brand-secondary text-base">←</Text>
-                <Text className="text-brand-text/60 ml-2 font-medium">Exit</Text>
-              </TouchableOpacity>
-              
-              <View className="items-center">
-                 <Text className="font-serif text-brand-secondary text-lg italic">
-                   {currentIndex + 1} of {questions.length}
-                 </Text>
-                 <View className="w-12 h-[1px] bg-brand-secondary/30 mt-1" />
-              </View>
-              
-              <View className="w-12" /> {/* Spacer */}
-           </View>
-
-           {/* Question Card - Luxury Scroll Style */}
-           <View className="bg-brand-surface/60 p-10 rounded-[48px] border border-brand-text/5 mb-10 shadow-2xl overflow-hidden">
-              <View className="absolute top-0 left-0 right-0 h-[100px] bg-brand-secondary/5" />
-              <Text className="text-3xl font-serif text-brand-text leading-tight mb-2">
-                {currentQuestion.text}
-              </Text>
-           </View>
-
-           {/* Options Grid-like List */}
-           <View className="space-y-5">
-              {currentQuestion.options.map((option: string, index: number) => {
-                let borderClass = "border-brand-secondary/20";
-                let textClass = "text-brand-text/80";
-                let bgClass = "bg-brand-surface/30";
-
-                if (answered) {
-                   if (index === currentQuestion.correctAnswerIndex) {
-                      borderClass = "border-green-500/50";
-                      bgClass = "bg-green-500/10";
-                      textClass = "text-green-400 font-bold";
-                   } else if (index === selected) {
-                      borderClass = "border-brand-primary/50";
-                      bgClass = "bg-brand-primary/10";
-                      textClass = "text-brand-primary font-bold";
-                   } else {
-                      bgClass = "opacity-30";
-                   }
-                }
-
-                return (
-                  <TouchableOpacity 
-                    key={index}
-                    activeOpacity={0.8}
-                    className={`p-6 rounded-[24px] border ${borderClass} ${bgClass}`}
-                    onPress={() => handleAnswer(index)}
-                  >
-                    <View className="flex-row items-center">
-                      <View className={`w-8 h-8 rounded-full border ${borderClass} items-center justify-center mr-4`}>
-                        <Text className={`text-xs ${textClass}`}>
-                          {String.fromCharCode(65 + index)}
-                        </Text>
-                      </View>
-                      <Text className={`text-lg transition-all duration-300 ${textClass}`}>{option}</Text>
-                    </View>
-                  </TouchableOpacity>
-                )
-              })}
-           </View>
-
-           {/* Feedback Modal-like View */}
-           {answered && (
-             <View className="mt-12 bg-brand-surface/80 p-8 rounded-[40px] border border-brand-secondary/10">
-                <View className="flex-row items-center mb-6">
-                   <View className={`w-3 h-3 rounded-full mr-3 ${isCorrect ? 'bg-green-500' : 'bg-brand-primary'}`} />
-                   <Text className={`text-2xl font-serif italic ${isCorrect ? 'text-green-400' : 'text-brand-primary'}`}>
-                     {isCorrect ? 'Stellar' : 'Not quite'}
-                   </Text>
-                </View>
-                
-                <Text className="text-brand-text/70 leading-relaxed text-lg mb-8">
-                  {currentQuestion.explanation}
-                </Text>
-                
-                <View className="bg-brand-primary/5 p-6 rounded-3xl border border-brand-primary/10 mb-10">
-                   <Text className="text-[10px] font-bold uppercase text-brand-secondary tracking-[2px] mb-3">
-                     Cultural Context
-                   </Text>
-                   <Text className="text-base italic text-brand-muted/90 leading-relaxed">
-                     {currentQuestion.culturalContext}
-                   </Text>
-                </View>
-
-                <TouchableOpacity 
-                  onPress={nextQuestion}
-                  activeOpacity={0.9}
-                >
-                  <LinearGradient
-                    colors={['#D4AF37', '#B8860B']}
-                    start={{ x: 0, y: 0 }}
-                    end={{ x: 1, y: 1 }}
-                    className="p-5 rounded-2xl shadow-lg"
-                  >
-                    <Text className="text-brand-primary text-center font-bold text-lg uppercase tracking-widest">
-                        {currentIndex < questions.length - 1 ? "Next Insight" : "Finish Pack"}
-                    </Text>
-                  </LinearGradient>
-                </TouchableOpacity>
+        <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 40 }}>
+          {/* Progress & Timer */}
+          <View style={{ marginHorizontal: 20, marginBottom: 24 }}>
+             <View style={{ height: 4, backgroundColor: '#262b29', borderRadius: 2 }}>
+               <View style={{ height: 4, backgroundColor: '#59de9b', borderRadius: 2, width: `${((qIdx + 1) / totalQuestions) * 100}%` }} />
              </View>
-           )}
+             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 12 }}>
+                <Text style={{ color: '#89938f', fontSize: 12 }}>{timeLeft}s remaining</Text>
+                <Text style={{ color: '#89938f', fontSize: 12, fontWeight: '700' }}>Q{qIdx + 1}/{totalQuestions}</Text>
+             </View>
+          </View>
+
+          {/* Question Card */}
+          <View style={{ marginHorizontal: 20, backgroundColor: '#1c211e', borderRadius: 24, padding: 24, marginBottom: 24 }}>
+            <Text style={{ color: '#dfe4e0', fontSize: 22, fontWeight: '800', lineHeight: 32 }}>
+              {currentQuestion.text}
+            </Text>
+          </View>
+
+          {/* Options */}
+          <View style={{ paddingHorizontal: 20 }}>
+            {currentQuestion.options.map((opt, i) => {
+              const isSelected = selectedIdx === i;
+              const isCorrect = i === currentQuestion.correctAnswerIndex;
+              const answered = gameState === 'answered';
+
+              let borderColor = 'transparent';
+              let bgColor = '#262b29';
+              if (answered) {
+                if (isCorrect) {
+                    borderColor = '#59de9b';
+                    bgColor = 'rgba(89,222,155,0.1)';
+                } else if (isSelected) {
+                    borderColor = '#ff4444';
+                    bgColor = 'rgba(255,68,68,0.1)';
+                }
+              }
+
+              return (
+                <TouchableOpacity
+                  key={i}
+                  onPress={() => handleAnswer(i)}
+                  disabled={answered}
+                  style={{
+                    backgroundColor: bgColor,
+                    borderRadius: 16, padding: 20, marginBottom: 12,
+                    borderWidth: 2, borderColor,
+                    flexDirection: 'row', alignItems: 'center'
+                  }}
+                >
+                  <View style={{ width: 30, height: 30, borderRadius: 15, backgroundColor: isSelected ? '#59de9b' : '#3f4945', alignItems: 'center', justifyContent: 'center', marginRight: 12 }}>
+                    <Text style={{ color: '#0f1412', fontWeight: '900' }}>{LETTERS[i]}</Text>
+                  </View>
+                  <Text style={{ color: '#dfe4e0', fontSize: 16, fontWeight: '600', flex: 1 }}>{opt}</Text>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+
+          {/* Feedback */}
+          {gameState === 'answered' && (
+            <View style={{ marginHorizontal: 20, marginTop: 10, padding: 20, backgroundColor: 'rgba(89,222,155,0.05)', borderRadius: 20, borderWidth: 1, borderColor: 'rgba(89,222,155,0.1)' }}>
+               <Text style={{ color: '#59de9b', fontWeight: '800', marginBottom: 8, fontSize: 13, textTransform: 'uppercase' }}>Context & Insight</Text>
+               <Text style={{ color: '#bfc9c4', lineHeight: 22, fontSize: 14 }}>{currentQuestion.explanation}</Text>
+               {currentQuestion.culturalContext && (
+                 <View style={{ marginTop: 16, padding: 12, backgroundColor: 'rgba(233,195,73,0.05)', borderRadius: 12 }}>
+                    <Text style={{ color: '#e9c349', fontSize: 11, fontWeight: '800', marginBottom: 4 }}>CULTURAL TIDBIT</Text>
+                    <Text style={{ color: '#dfe4e0', fontSize: 13, fontStyle: 'italic' }}>{currentQuestion.culturalContext}</Text>
+                 </View>
+               )}
+               <TouchableOpacity
+                 onPress={nextQuestion}
+                 style={{ marginTop: 20, backgroundColor: '#59de9b', padding: 16, borderRadius: 12, alignItems: 'center' }}
+               >
+                 <Text style={{ color: '#0f1412', fontWeight: '900' }}>
+                   {isLastQuestion ? "FINISH SESSION" : "NEXT QUESTION"}
+                 </Text>
+               </TouchableOpacity>
+            </View>
+          )}
         </ScrollView>
       </SafeAreaView>
     </View>

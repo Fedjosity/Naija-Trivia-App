@@ -2,7 +2,7 @@ import * as FileSystem from 'expo-file-system';
 import { storage, StorageKeys, type PackSyncInfo } from '../store/storage';
 import { PackSchema, type Pack } from '@antigravity/content-schema';
 
-const PACKS_DIR = `${FileSystem.documentDirectory}packs/`;
+const PACKS_DIR = `${(FileSystem as any).documentDirectory}packs/`;
 
 /**
  * Service to manage downloading and local storage of trivia packs.

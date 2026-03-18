@@ -36,7 +36,7 @@ export default function GameScreen() {
 
   const loadPack = async () => {
     try {
-      const fileUri = `${FileSystem.documentDirectory}packs/${id}.json`;
+      const fileUri = `${(FileSystem as any).documentDirectory}packs/${id}.json`;
       const fileContent = await FileSystem.readAsStringAsync(fileUri);
       const data = JSON.parse(fileContent);
       const validation = PackSchema.safeParse(data);

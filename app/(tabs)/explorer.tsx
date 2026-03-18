@@ -36,10 +36,10 @@ export default function ExplorerScreen() {
     }
   };
 
-  const handleDownload = async (pack: any) => {
+  const handleDownload = async (pack: any) => { // TODO: Define Pack type in mobile if not matched
     if (!pack.downloadUrl) return;
     setSyncing(pack.id);
-    const success = await PackSyncService.downloadPack(pack.downloadUrl, pack.id);
+    const success = await PackSyncService.downloadPack(pack.id, pack.version || '1.0', pack.downloadUrl);
     setSyncing(null);
     if (success) {
       // Refresh or notify

@@ -1,8 +1,14 @@
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+import { useEffect } from "react";
+import { RemoteConfigService } from "../services/remoteConfig";
 import "../global.css";
 
 export default function RootLayout() {
+  useEffect(() => {
+    RemoteConfigService.initialize();
+  }, []);
+
   return (
     <>
       <StatusBar style="light" />

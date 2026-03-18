@@ -1,5 +1,6 @@
 import Purchases, { type PurchasesPackage, type CustomerInfo } from 'react-native-purchases';
 import { Platform } from 'react-native';
+import { AnalyticsService } from './analytics';
 
 const RC_API_KEYS = {
   apple: 'goog_placeholder_apple', // To be replaced by User
@@ -45,6 +46,14 @@ export const RevenueCatService = {
   async purchasePackage(pkg: PurchasesPackage): Promise<CustomerInfo | null> {
     try {
       const { customerInfo } = await Purchases.purchasePackage(pkg);
+      
+      // Analytics
+      if (pkg.product.identifier === 'naija_gold_sub') {
+        AnalyticsService.trackSubscriptionStarted('gold');
+      } else {
+        AnalyticsService.trackPurchase(pkg.product.identifier, pkg.product.price, pkg.product.currencyCode);
+      }
+      
       return customerInfo;
     } catch (e: any) {
       if (!e.userCancelled) {

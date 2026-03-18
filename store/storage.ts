@@ -1,10 +1,10 @@
-import { MMKV } from 'react-native-mmkv';
+import { MMKV as MMKVClass } from 'react-native-mmkv';
 
 /**
  * Encrypted and high-performance local storage for Naija Trivia.
  * Used for wallet, streaks, and offline pack metadata.
  */
-export const storage = new MMKV({
+export const storage = new MMKVClass({
   id: 'naija-trivia-storage',
   // In production, we would use an encryption key from the Keystore/Keychain
   // encryptionKey: 'some-secure-key' 
@@ -18,6 +18,7 @@ export enum StorageKeys {
   WALLET = 'user_wallet',
   DOWNLOADED_PACKS = 'downloaded_packs',
   CURRENT_STREAK = 'current_streak',
+  DAILY_REWARD_LAST_CLAIMED = 'daily_reward_last_claimed',
   PENDING_SCORES = 'pending_scores'
 }
 

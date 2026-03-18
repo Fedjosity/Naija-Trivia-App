@@ -5,10 +5,10 @@ import { remoteConfig } from "./firebase";
  * Default game balancing parameters
  */
 export const REMOTE_CONFIG_DEFAULTS = {
-  MAX_SCORE_PER_PACK: 10000,
-  MIN_POSSIBLE_SPEED: 20,
+  MAX_SCORE_PER_PACK: 500,
+  MIN_POSSIBLE_SPEED: 2.0, // Seconds per question minimum or similar threshold
   COIN_MULTIPLIER: 1.0,
-  DAILY_REWARD_BASE: 500
+  DAILY_CHALLENGE_REWARD: 50
 };
 
 /**

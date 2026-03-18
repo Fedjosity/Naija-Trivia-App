@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useState, useEffect, useRef } from 'react';
+import { RemoteConfigService } from '../../services/remoteConfig';
 
 // ─── Stitch Tokens ────────────────────────────────────────────────────────────
 // bg: #0f1412 | surface_container: #1c211e | surface_container_high: #262b29
@@ -140,7 +141,7 @@ export default function ArenaScreen() {
   const [qIdx, setQIdx] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);
   const [showFact, setShowFact] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(MAX_TIME);
+  const [timeLeft, setTimeLeft] = useState(RemoteConfigService.getNumber('MIN_POSSIBLE_SPEED') || 30);
   const [score, setScore] = useState(0);
   const [finished, setFinished] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -151,7 +152,7 @@ export default function ArenaScreen() {
   const answered = selected !== null;
 
   useEffect(() => {
-    setTimeLeft(MAX_TIME);
+    setTimeLeft(RemoteConfigService.getNumber('MIN_POSSIBLE_SPEED') || 30);
     setSelected(null);
     setShowFact(false);
     factAnim.setValue(40);
@@ -161,7 +162,7 @@ export default function ArenaScreen() {
   useEffect(() => {
     if (answered || finished) { if (timerRef.current) clearInterval(timerRef.current); return; }
     timerRef.current = setInterval(() => {
-      setTimeLeft(t => {
+      setTimeLeft((t: number) => {
         if (t <= 1) {
           clearInterval(timerRef.current!);
           setSelected(-1);

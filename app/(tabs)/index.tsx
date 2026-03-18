@@ -31,6 +31,37 @@ function useCountdown(initial: number) {
   return { h, m, s };
 }
 
+function DailyRewardComponent() {
+  const { claimDailyReward } = useNaijaStore();
+  const [claimed, setClaimed] = useState(false);
+
+  const handleClaim = () => {
+    if (claimDailyReward()) {
+      setClaimed(true);
+    }
+  };
+
+  return (
+    <View style={{ paddingHorizontal: 22, paddingVertical: 12, backgroundColor: 'rgba(233,195,73,0.1)', borderTopWidth: 1, borderTopColor: 'rgba(233,195,73,0.15)' }}>
+       <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+             <Coins size={18} color="#e9c349" />
+             <Text style={{ color: '#dfe4e0', fontSize: 13, fontWeight: '700' }}>Daily Gift Available!</Text>
+          </View>
+          <TouchableOpacity 
+            onPress={handleClaim} 
+            disabled={claimed}
+            style={{ backgroundColor: claimed ? '#262b29' : '#e9c349', paddingHorizontal: 12, paddingVertical: 6, borderRadius: 8 }}
+          >
+             <Text style={{ color: claimed ? '#89938f' : '#0f1412', fontWeight: '800', fontSize: 11 }}>
+                {claimed ? 'CLAIMED' : 'CLAIM'}
+             </Text>
+          </TouchableOpacity>
+       </View>
+    </View>
+  );
+}
+
 export default function DashboardScreen() {
   const router = useRouter();
   const drawer = useRef<DrawerHandle>(null);
@@ -61,6 +92,7 @@ export default function DashboardScreen() {
                 </View>
               </TouchableOpacity>
             </LinearGradient>
+            <DailyRewardComponent />
             <View style={{ borderTopWidth: 1, borderTopColor: 'rgba(255,255,255,0.06)', paddingHorizontal: 22, paddingVertical: 14, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
               <Text style={{ color: '#89938f', fontSize: 10, textTransform: 'uppercase', letterSpacing: 2 }}>Expires In</Text>
               <View style={{ flexDirection: 'row', gap: 16 }}>

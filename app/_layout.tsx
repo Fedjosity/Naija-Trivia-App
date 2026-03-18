@@ -1,16 +1,28 @@
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../services/firebase";
+import { AnalyticsService } from "../services/analytics";
 import { RemoteConfigService } from "../services/remoteConfig";
 import "../global.css";
 
 export default function RootLayout() {
   useEffect(() => {
     RemoteConfigService.initialize();
-    // In production, we would pass the real User ID here
+    
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        AnalyticsService.setUser(user.uid, { email: user.email });
+        console.log("Analytics User Set:", user.uid);
+      }
+    });
+
     import('../services/revenueCat').then(({ RevenueCatService }) => {
       RevenueCatService.initialize();
     });
+
+    return () => unsubscribe();
   }, []);
 
   return (

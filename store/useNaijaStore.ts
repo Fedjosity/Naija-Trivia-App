@@ -1,5 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { storage, StorageKeys, type UserStats, type Wallet } from './storage';
+import { RemoteConfigService } from '../services/remoteConfig';
+import { AnalyticsService } from '../services/analytics';
 
 /**
  * Hook to manage user stats and wallet state with persistence
@@ -53,10 +55,23 @@ export function useNaijaStore() {
     return () => listener.remove();
   }, []);
 
+  const claimDailyReward = useCallback(() => {
+    const today = new Date().toISOString().split('T')[0];
+    const lastClaimed = storage.getString(StorageKeys.DAILY_REWARD_LAST_CLAIMED);
+    
+    if (lastClaimed === today) return false;
+
+    const reward = RemoteConfigService.getNumber('DAILY_CHALLENGE_REWARD') || 50;
+    updateWallet({ naijaCoins: wallet.naijaCoins + reward });
+    storage.set(StorageKeys.DAILY_REWARD_LAST_CLAIMED, today);
+    return true;
+  }, [wallet.naijaCoins, updateWallet]);
+
   return {
     stats,
     wallet,
     updateStats,
     updateWallet,
+    claimDailyReward,
   };
 }

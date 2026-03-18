@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { type Question, type Pack } from '@antigravity/content-schema';
 import { RemoteConfigService } from '../services/remoteConfig';
+import { AnalyticsService } from '../services/analytics';
 import { useNaijaStore } from '../store/useNaijaStore';
 
 export type GameState = 'idle' | 'playing' | 'answered' | 'finished';
@@ -51,9 +52,17 @@ export function useGameEngine(pack: Pack | null) {
     const isCorrect = idx === currentQuestion.correctAnswerIndex;
     if (isCorrect) {
       setCorrectAnswers(c => c + 1);
+      
       // Logic for score based on time
       const speedBonus = Math.floor(timeLeft / 2);
-      setScore(s => s + 100 + speedBonus);
+      const basePoints = 100;
+      const calculatedPoints = basePoints + speedBonus;
+      
+      setScore(s => {
+        const nextScore = s + calculatedPoints;
+        const maxScore = RemoteConfigService.getNumber('MAX_SCORE_PER_PACK') || 500;
+        return nextScore > maxScore ? maxScore : nextScore;
+      });
     }
   }, [gameState, currentQuestion, timeLeft]);
 
@@ -70,6 +79,7 @@ export function useGameEngine(pack: Pack | null) {
 
   const finalizeGame = useCallback(() => {
     setGameState('finished');
+    AnalyticsService.trackPackCompleted(pack?.id || 'unknown', score, true);
     
     // Update local persistence
     updateStats({
@@ -85,6 +95,7 @@ export function useGameEngine(pack: Pack | null) {
 
   const startGame = useCallback(() => {
     if (!pack) return;
+    AnalyticsService.trackPackStarted(pack.id);
     setQIdx(0);
     setScore(0);
     setCorrectAnswers(0);

@@ -54,7 +54,7 @@ Uses workspace packages for data integrity:
 
 ### Prerequisites
 - Node.js & pnpm
-- Expo Go (on your physical device)
+- **Important**: This app uses custom native modules (RevenueCat, NitroModules). **It will NOT work in Expo Go**. You must create a Custom Development Build.
 
 ### Installation
 From the **root** of the monorepo:
@@ -63,14 +63,25 @@ pnpm install
 ```
 
 ### Android Studio & Emulator
-1.  **Install Android Studio**: Ensure you have the latest version of [Android Studio](https://developer.android.com/studio) installed.
+1.  **Install Android Studio**: Ensure you have the latest version of Android Studio installed.
 2.  **Configure SDK**: In Android Studio, go to `Settings > Languages & Frameworks > Android SDK`. Install the latest SDK Platform and Build Tools.
 3.  **Environment Variables**: Ensure `ANDROID_HOME` is set in your system environment variables and `platform-tools` is in your `PATH`.
-4.  **Launch Emulator**: Open `Device Manager` in Android Studio and start a Virtual Device (Pixel 6 or higher recommended).
-5.  **Run with Android**:
-    ```bash
-    pnpm android --filter mobile-app
-    ```
+4.  **Launch Emulator**: Open `Device Manager` in Android Studio and start a Virtual Device.
+
+### Building & Running the App (Custom Dev Client)
+Since Expo Go is not supported, you must build the native app:
+
+**To build from scratch:**
+```bash
+npx expo run:android
+```
+
+**To start the local server (after building):**
+If you have already built the app onto your emulator, start the Expo development server:
+```bash
+npx expo start
+```
+Then, press **`a`** in the terminal to launch the custom app on your emulator and connect to the local server.
 
 ---
 

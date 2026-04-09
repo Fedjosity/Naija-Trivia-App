@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, ImageBackground } from 'react-native';
+import { View, Text, Image, TouchableOpacity, ImageBackground } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -21,10 +21,13 @@ export default function LoginScreen() {
       <View className="absolute bottom-40 left-16 w-48 h-48 rounded-full bg-brand-green/10 blur-3xl" />
 
       <SafeAreaView className="flex-1 justify-center px-6">
-        {/* Logo icon */}
         <View className="items-center mb-8">
-          <View className="w-14 h-14 rounded-2xl bg-brand-gold items-center justify-center shadow-lg">
-            <Text style={{ fontSize: 26 }}>📜</Text>
+          <View className="w-28 h-28 rounded-[2rem] bg-black/40 items-center justify-center border border-white/10 p-2 shadow-2xl relative overflow-hidden">
+            <Image 
+              source={require('../../assets/logo/Logo.png')} 
+              className="w-full h-full" 
+              resizeMode="contain" 
+            />
           </View>
         </View>
 

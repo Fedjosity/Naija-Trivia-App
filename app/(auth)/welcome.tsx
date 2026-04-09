@@ -34,15 +34,15 @@ export default function WelcomeScreen() {
       {/* Top nav */}
       <SafeAreaView className="flex-1">
         <View className="flex-row justify-between items-center px-6 pt-2">
-          <TouchableOpacity className="w-9 h-9 items-center justify-center">
-            <View className="space-y-1.5">
-              <View className="w-5 h-0.5 bg-brand-text" />
-              <View className="w-5 h-0.5 bg-brand-text" />
-              <View className="w-5 h-0.5 bg-brand-text" />
-            </View>
+          <TouchableOpacity className="w-12 h-12 items-center justify-center rounded-[1rem] bg-brand-surface/20 border border-white/5 overflow-hidden">
+            <Image 
+              source={require('../../assets/logo/Logo.png')} 
+              className="w-full h-full" 
+              resizeMode="contain" 
+            />
           </TouchableOpacity>
-          <Text className="text-brand-text font-bold text-base">Daily Naija Trivia</Text>
-          <TouchableOpacity className="w-9 h-9 rounded-full bg-brand-surface items-center justify-center">
+          <Text className="text-brand-text font-black text-xs tracking-[4px] uppercase ml-2 flex-1">NAIJA TRIVIA</Text>
+          <TouchableOpacity className="w-10 h-10 rounded-full bg-brand-surface/20 items-center justify-center border border-white/5">
             <Text className="text-brand-muted text-xs">👤</Text>
           </TouchableOpacity>
         </View>

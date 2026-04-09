@@ -8,7 +8,7 @@
  *   drawer.current?.open()
  */
 import {
-  View, Text, TouchableOpacity, Dimensions, Pressable,
+  View, Text, TouchableOpacity, Dimensions, Pressable, Image,
 } from 'react-native';
 import { useRouter, usePathname } from 'expo-router';
 import Animated, {
@@ -95,14 +95,19 @@ const DrawerMenu = forwardRef<DrawerHandle>((_, ref) => {
       }, drawerStyle]}>
         <SafeAreaView style={{ flex: 1 }} edges={['top', 'bottom']}>
           {/* Header */}
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 24, paddingTop: 12, paddingBottom: 24 }}>
-            <View>
-              <Text style={{ color: '#dfe4e0', fontWeight: '900', fontSize: 18, letterSpacing: -0.5 }}>Daily Naija Trivia</Text>
-              <Text style={{ color: '#89938f', fontSize: 12, marginTop: 2 }}>Navigate the Archive</Text>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 24, paddingTop: 16, paddingBottom: 24 }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+              <View style={{ width: 48, height: 48, backgroundColor: '#000', borderRadius: 14, padding: 4, borderWidth: 1, borderColor: 'rgba(255,255,255,0.1)' }}>
+                <Image source={require('../assets/logo/Logo.png')} style={{ width: '100%', height: '100%' }} resizeMode="contain" />
+              </View>
+              <View>
+                <Text style={{ color: '#dfe4e0', fontWeight: '900', fontSize: 18, letterSpacing: -0.5 }}>NAIJA TRIVIA</Text>
+                <Text style={{ color: '#89938f', fontSize: 11, marginTop: 2, fontWeight: '700', textTransform: 'uppercase', letterSpacing: 1 }}>The Archive</Text>
+              </View>
             </View>
             <TouchableOpacity
               onPress={close}
-              style={{ width: 36, height: 36, borderRadius: 10, backgroundColor: '#262b29', alignItems: 'center', justifyContent: 'center' }}
+              style={{ width: 36, height: 36, borderRadius: 10, backgroundColor: '#262b29', alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderColor: 'rgba(255,255,255,0.05)' }}
             >
               <X size={18} color="#bfc9c4" />
             </TouchableOpacity>

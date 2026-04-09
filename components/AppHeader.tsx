@@ -3,7 +3,7 @@
  * Renders the hamburger button, screen title, and right-side actions.
  * Tapping the hamburger calls open() on the passed DrawerHandle ref.
  */
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { Menu, Bell, Search } from 'lucide-react-native';
 import Animated, {
   useSharedValue, useAnimatedStyle, withSpring,
@@ -41,10 +41,10 @@ export default function AppHeader({ title, drawerRef, showSearch, rightSlot }: A
       <Animated.View style={animStyle}>
         <TouchableOpacity
           onPress={handleHamburger}
-          style={{ width: 40, height: 40, borderRadius: 12, backgroundColor: '#262b29', alignItems: 'center', justifyContent: 'center' }}
+          style={{ width: 44, height: 44, borderRadius: 14, backgroundColor: '#000', alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderColor: 'rgba(255,255,255,0.1)', shadowColor: '#59de9b', shadowOpacity: 0.1, shadowRadius: 10 }}
           activeOpacity={0.75}
         >
-          <Menu size={20} color="#dfe4e0" />
+          <Image source={require('../assets/logo/Logo.png')} style={{ width: '85%', height: '85%' }} resizeMode="contain" />
         </TouchableOpacity>
       </Animated.View>
 

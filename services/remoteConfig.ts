@@ -19,6 +19,8 @@ export const RemoteConfigService = {
    * Initialize and fetch config
    */
   async initialize() {
+    if (!remoteConfig) return;
+
     try {
       remoteConfig.settings.minimumFetchIntervalMillis = 3600000; // 1 hour
       remoteConfig.defaultConfig = REMOTE_CONFIG_DEFAULTS;
@@ -34,6 +36,9 @@ export const RemoteConfigService = {
    * Get a numeric parameter
    */
   getNumber(key: keyof typeof REMOTE_CONFIG_DEFAULTS): number {
+    if (!remoteConfig) {
+      return REMOTE_CONFIG_DEFAULTS[key] as number;
+    }
     return getValue(remoteConfig, key).asNumber();
   },
 
@@ -41,6 +46,9 @@ export const RemoteConfigService = {
    * Get a boolean parameter (if we add any later)
    */
   getBoolean(key: string): boolean {
+    if (!remoteConfig) {
+      return false; // Default to false if we don't have it in defaults
+    }
     return getValue(remoteConfig, key).asBoolean();
   }
 };

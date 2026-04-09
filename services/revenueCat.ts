@@ -3,8 +3,13 @@ import { Platform } from 'react-native';
 import { AnalyticsService } from './analytics';
 
 const RC_API_KEYS = {
-  apple: 'goog_placeholder_apple', // To be replaced by User
-  google: 'goog_placeholder_google',
+  apple: process.env.EXPO_PUBLIC_RC_APPLE_KEY || 'goog_placeholder_apple', // To be replaced by User
+  google: process.env.EXPO_PUBLIC_RC_GOOGLE_KEY || 'goog_placeholder_google',
+};
+
+const isConfigured = () => {
+  const key = Platform.OS === 'ios' ? RC_API_KEYS.apple : RC_API_KEYS.google;
+  return key && !key.includes('placeholder');
 };
 
 /**
@@ -15,6 +20,11 @@ export const RevenueCatService = {
    * Initialize the SDK
    */
   async initialize(userId?: string) {
+    if (!isConfigured()) {
+      console.warn('RevenueCat is not configured (missing API keys). Skipping initialization.');
+      return;
+    }
+
     try {
       if (Platform.OS === 'ios') {
         Purchases.configure({ apiKey: RC_API_KEYS.apple, appUserID: userId });
@@ -31,6 +41,8 @@ export const RevenueCatService = {
    * Get available offerings (Packs, Gold)
    */
   async getOfferings() {
+    if (!isConfigured()) return null;
+
     try {
       const offerings = await Purchases.getOfferings();
       return offerings.current;
@@ -44,6 +56,11 @@ export const RevenueCatService = {
    * Purchase a package
    */
   async purchasePackage(pkg: PurchasesPackage): Promise<CustomerInfo | null> {
+    if (!isConfigured()) {
+      console.warn('Cannot purchase package: RevenueCat is not configured.');
+      return null;
+    }
+
     try {
       const { customerInfo } = await Purchases.purchasePackage(pkg);
       
@@ -67,6 +84,8 @@ export const RevenueCatService = {
    * Check if user is a Gold member
    */
   async isGoldMember(): Promise<boolean> {
+    if (!isConfigured()) return false;
+
     try {
       const customerInfo = await Purchases.getCustomerInfo();
       return !!customerInfo.entitlements.active['naija_gold'];

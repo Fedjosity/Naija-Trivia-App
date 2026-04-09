@@ -28,7 +28,7 @@ export default function TabLayout() {
           contentStyle: { backgroundColor: "#0b0e0c" },
         }}
       >
-        <Stack.Screen name="index" />
+        <Stack.Screen name="home" />
         <Stack.Screen name="explorer" />
         <Stack.Screen name="boutique" />
         <Stack.Screen name="leaderboard" />

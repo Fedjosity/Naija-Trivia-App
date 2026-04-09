@@ -12,7 +12,7 @@ const TAB_BG = "#1c211e"; // surface_container
 const TAB_BORDER = "rgba(255,255,255,0.06)";
 
 const TABS = [
-  { name: 'index', label: 'Home', Icon: Home, path: '/' },
+  { name: 'home', label: 'Home', Icon: Home, path: '/home' },
   { name: 'explorer', label: 'Discover', Icon: Compass, path: '/explorer' },
   { name: 'boutique', label: 'Boutique', Icon: ShoppingBag, path: '/boutique' },
   { name: 'leaderboard', label: 'Prestige', Icon: Trophy, path: '/leaderboard' },
@@ -25,7 +25,7 @@ export default function BottomTabBar() {
   const insets = useSafeAreaInsets();
 
   const getIsActive = (tabPath: string) => {
-    if (tabPath === '/') return pathname === '/' || pathname === '/(tabs)';
+    if (tabPath === '/home') return pathname === '/home' || pathname === '/(tabs)/home';
     return pathname.includes(tabPath);
   };
 
@@ -41,7 +41,7 @@ export default function BottomTabBar() {
             onPress={() => {
               // We use replace to keep the history clean, 
               // and the Stack layout will handle the "sliding" if we configure it
-              router.replace(`/(tabs)${tab.path === '/' ? '' : tab.path}`);
+              router.replace(`/(tabs)${tab.path}`);
             }}
             style={styles.tab}
             activeOpacity={0.7}

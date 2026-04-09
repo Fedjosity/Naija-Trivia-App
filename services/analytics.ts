@@ -1,7 +1,8 @@
 import { getAnalytics, logEvent, setUserProperties, setUserId } from "firebase/analytics";
+import { Platform } from "react-native";
 import app from "./firebase";
 
-const analytics = typeof window !== 'undefined' ? getAnalytics(app) : null;
+const analytics = Platform.OS === 'web' ? getAnalytics(app) : null;
 
 /**
  * Service to manage Firebase Analytics for Naija Trivia.

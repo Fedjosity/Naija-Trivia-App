@@ -82,7 +82,7 @@ export default function LoginScreen() {
 
           {/* Guest */}
           <TouchableOpacity
-            onPress={() => router.replace('/(tabs)/home')}
+            onPress={() => router.replace('/home')}
             className="items-center"
             activeOpacity={0.7}
           >
